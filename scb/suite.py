@@ -30,7 +30,7 @@ class Benchmark:
         return mod.expected() & 0xFFFF
 
 
-ORDER = ["sum16", "sieve", "bubble", "crc16", "copy", "entities", "fib", "popcount",
+ORDER = ["sieve", "bubble", "crc16", "copy", "entities", "fib", "popcount",
          "dot", "ptrsum", "lz4", "bfs_grid", "crc32", "pi", "fact", "sieve_bit"]
 
 

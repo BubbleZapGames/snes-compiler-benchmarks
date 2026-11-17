@@ -144,7 +144,6 @@ in two tiers.
 
 | name | exercises |
 |---|---|
-| `sum16` | 16-bit accumulate over a u16 array |
 | `sieve` | byte-array stores, nested loops, a 16-bit index |
 | `bubble` | compare-and-swap, the 8-bit loop bound vs C's int promotion |
 | `crc16` | shifts, xor, branches on a bit |
@@ -154,6 +153,13 @@ in two tiers.
 | `popcount` | an inner bit loop over bytes |
 | `dot` | 8×8 multiply-accumulate (which multiply routine each compiler reaches for) |
 | `ptrsum` | summing through a pointer |
+
+`sum16` (a 16-bit sum over a u16 array) was retired on 2026-11-17. It
+ranked the compilers almost exactly as `copy` does (rank correlation 0.97),
+and its best compiler was within 1.20× of the hand-written version, the
+least of any benchmark, so it separated the least. `ptrsum` still covers a
+summing loop. The retirement is a run record of its own, so history
+compares every run over the same benchmarks.
 
 ### c-bench-64 — 32-bit arithmetic and bit arrays
 

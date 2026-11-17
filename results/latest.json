@@ -1,8 +1,8 @@
 {
  "schema": 1,
- "run_id": "2026-11-17-193431",
- "date": "2026-11-17T19:34:31Z",
- "label": null,
+ "run_id": "2026-11-17-194946",
+ "date": "2026-11-17T19:49:46Z",
+ "label": "retire sum16: it ranked the compilers like copy, the closest of any pair",
  "harness_commit": "668fa316",
  "emulator": {
   "name": "Mesen-GDB",
@@ -129,9 +129,6 @@
   }
  },
  "benchmarks": {
-  "sum16": {
-   "expected": 15744
-  },
   "sieve": {
    "expected": 172
   },
@@ -179,78 +176,6 @@
   }
  },
  "cells": {
-  "sum16": {
-   "r65-fs": {
-    "status": "ok",
-    "cycles": 4622,
-    "size": 48,
-    "value": 15744,
-    "measured_in": "2026-11-17-095602"
-   },
-   "r65": {
-    "status": "ok",
-    "cycles": 4622,
-    "size": 51,
-    "value": 15744,
-    "measured_in": "2026-11-17-095602"
-   },
-   "vbcc": {
-    "status": "ok",
-    "cycles": 5324,
-    "size": 578,
-    "value": 15744,
-    "measured_in": "2026-11-17-095602"
-   },
-   "vbcc-nu": {
-    "status": "ok",
-    "cycles": 8727,
-    "size": 62,
-    "value": 15744,
-    "measured_in": "2026-11-17-095602"
-   },
-   "calypsi": {
-    "status": "ok",
-    "cycles": 8995,
-    "size": 65,
-    "value": 15744,
-    "measured_in": "2026-11-17-095602"
-   },
-   "wdc": {
-    "status": "ok",
-    "cycles": 11829,
-    "size": 94,
-    "value": 15744,
-    "measured_in": "2026-11-17-095602"
-   },
-   "llvm-mos": {
-    "status": "ok",
-    "cycles": 12572,
-    "size": 133,
-    "value": 15744,
-    "measured_in": "2026-11-17-095602"
-   },
-   "tcc": {
-    "status": "ok",
-    "cycles": 11836,
-    "size": 114,
-    "value": 15744,
-    "measured_in": "2026-11-17-095602"
-   },
-   "cc65": {
-    "status": "ok",
-    "cycles": 45224,
-    "size": 283,
-    "value": 15744,
-    "measured_in": "2026-11-17-095602"
-   },
-   "asm": {
-    "status": "ok",
-    "cycles": 3851,
-    "size": 46,
-    "value": 15744,
-    "measured_in": "2026-11-17-111428"
-   }
-  },
   "sieve": {
    "r65-fs": {
     "status": "ok",
@@ -1258,61 +1183,71 @@
     "status": "ok",
     "cycles": 276667,
     "size": 334,
-    "value": 22089
+    "value": 22089,
+    "measured_in": "2026-11-17-193431"
    },
    "r65": {
     "status": "ok",
     "cycles": 376218,
     "size": 379,
-    "value": 22089
+    "value": 22089,
+    "measured_in": "2026-11-17-193431"
    },
    "vbcc": {
     "status": "ok",
     "cycles": 259546,
     "size": 858,
-    "value": 22089
+    "value": 22089,
+    "measured_in": "2026-11-17-193431"
    },
    "vbcc-nu": {
     "status": "ok",
     "cycles": 278994,
     "size": 591,
-    "value": 22089
+    "value": 22089,
+    "measured_in": "2026-11-17-193431"
    },
    "calypsi": {
     "status": "ok",
     "cycles": 301576,
     "size": 326,
-    "value": 22089
+    "value": 22089,
+    "measured_in": "2026-11-17-193431"
    },
    "wdc": {
     "status": "ok",
     "cycles": 394936,
     "size": 365,
-    "value": 22089
+    "value": 22089,
+    "measured_in": "2026-11-17-193431"
    },
    "llvm-mos": {
     "status": "ok",
     "cycles": 376433,
     "size": 881,
-    "value": 22089
+    "value": 22089,
+    "measured_in": "2026-11-17-193431"
    },
    "tcc": {
     "status": "ok",
     "cycles": 421481,
     "size": 520,
-    "value": 22089
+    "value": 22089,
+    "measured_in": "2026-11-17-193431"
    },
    "cc65": {
     "status": "ok",
     "cycles": 965291,
     "size": 837,
-    "value": 22089
+    "value": 22089,
+    "measured_in": "2026-11-17-193431"
    },
    "asm": {
     "status": "ok",
     "cycles": 106352,
     "size": 358,
-    "value": 22089
+    "value": 22089,
+    "measured_in": "2026-11-17-193431"
    }
   }
  }

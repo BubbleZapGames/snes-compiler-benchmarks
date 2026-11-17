@@ -1,3 +1,0 @@
-description = "Sum a 256-entry u16 array."
-category = "kernel"
-tags = ["loop", "u16", "array"]
