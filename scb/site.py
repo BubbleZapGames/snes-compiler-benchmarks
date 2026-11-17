@@ -238,7 +238,9 @@ def legend():
 def index_page(rec, tcs, benches):
     shown = board_tcs(rec, tcs, benches)
     payload = {"toolchains": shown, "labels": {t: tc_label(tcs, t) for t in shown},
-               "kinds": {t: kind(tcs, t) for t in shown}, "benches": list(benches),
+               "kinds": {t: kind(tcs, t) for t in shown},
+               "languages": {t: tcs[t].language for t in shown}, "benches": list(benches),
+               "statuses": {b: {t: cell_status(rec, b, t) for t in shown} for b in benches},
                "values": {m: {b: {t: results.value(rec, b, t, m) for t in shown} for b in benches}
                           for m, _, _ in METRICS}}
     lead = next(((g, t) for g, t, _, _ in scored(rec, tcs, benches, shown, "cycles")
@@ -256,14 +258,19 @@ def index_page(rec, tcs, benches):
   <h1>Which compiler writes the fastest SNES code?</h1>
   <p class="lede">Every compiler builds the same programs into a SNES ROM. Each call to <code>bench()</code> is timed in CPU cycles on an emulated console and its answer checked against a reference. A wrong answer counts as a failure, never as a time.</p>
   {facts([
-      ("Fastest 65816 compiler", f'{E(tc_label(tcs, lead[1]))} <span class="muted">{fmt_ratio(lead[0])}</span>' if lead else "–"),
+      ("Fastest 65816 compiler", f'<span id="fact-fastest">{E(tc_label(tcs, lead[1]))} <span class="muted">{fmt_ratio(lead[0])}</span></span>' if lead else "–"),
       ("Benchmarks", str(len(benches))),
-      ("Toolchains", str(len(shown))),
-      ("Correct answers", f"{correct} of {len(attempted)}"),
+      ("Toolchains", f'<span id="fact-toolchains">{len(shown)}</span>'),
+      ("Correct answers", f'<span id="fact-correct">{correct} of {len(attempted)}</span>'),
   ])}
 </section>
 
 <div class="controls">
+  <div class="seg" role="radiogroup" aria-label="Language" hidden>
+    <span class="seg-label">Language</span>
+    <button type="button" role="radio" aria-checked="true" data-lang="">All</button>
+    <button type="button" role="radio" aria-checked="false" data-lang="c">C</button>
+  </div>
   <label for="baseline">Compare against</label>
   <select id="baseline" disabled>
     <option value="">the best in each row</option>{options}

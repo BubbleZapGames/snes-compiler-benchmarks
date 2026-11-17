@@ -151,6 +151,16 @@ footer.site p { margin: 0; max-width: 48rem; }
   border: 1px solid var(--axis); border-radius: var(--radius); padding: 0.3rem 0.5rem; max-width: 100%;
 }
 .controls .note { flex: 1 1 22rem; }
+.seg { display: inline-flex; align-items: center; gap: 3px; padding: 3px; border: 1px solid var(--grid); border-radius: 8px; background: var(--page); margin-right: 0.75rem; }
+.seg[hidden] { display: none; }
+.seg-label { font-weight: 600; font-size: 0.95rem; padding: 0 0.5rem 0 0.35rem; }
+.seg button {
+  font: 500 0.9rem var(--text); color: var(--ink-2); background: none; border: 0; border-radius: 6px;
+  padding: 0.3rem 0.85rem; cursor: pointer;
+}
+.seg button[aria-checked="true"] { background: var(--accent); color: #fff; }
+.seg button:not([aria-checked="true"]):hover { color: var(--ink); background: var(--accent-soft); }
+.col-off { display: none; }
 
 /* the two boards */
 .boards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 30rem), 1fr)); gap: 0 3rem; }
