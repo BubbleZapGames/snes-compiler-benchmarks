@@ -81,6 +81,24 @@ notes = ["Windows tools, run under Wine. Measured locally.",
          "fact crashes: after the recursive call WDC816CC calls its 32-bit multiply helper without pushing the other operand.",
          "fib is wrong at every optimisation level: after the second recursive call WDC816CC adds the result from its scratch register R0, which nothing stored, instead of from A, where the manual says results return."]
 
+[jcc816]
+display = "JCC816 -O2"
+compiler = "jcc816"
+language = "c"
+version = "main"
+commit = "cd0522a"   # no releases; scb setup checks this out
+flags = ["-O", "2"]
+url = "https://github.com/Iacon1/JCC816"
+license = "MIT"
+placement = "globals in bank $7E with 24-bit addresses; direct page for its scratch registers"
+notes = ["JCC816 has no releases; the pin is a main commit, run with the JCC816.jar committed in it (Java 21 here).",
+         "It compiles the whole program at once and links through cc65's cl65. harness/jcc816/cl65 points that at none.lib, as cl65 otherwise links the c64 library.",
+         "int is 24 bits, so the suite's u16 is uint16_t here (unsigned short).",
+         "-O 2 is the highest documented level. -O 3 and --optimize-addresses fail on every benchmark (a Java exception; an illegal addressing mode in ca65).",
+         "The ROM is HiROM: with a LoROM header JCC816 throws while sizing a 32 KB ROM.",
+         "sieve and entities are wrong: a comparison builds its true/false result in X, then reloads X with an array index before testing it. lz4 and pi are wrong too.",
+         "fib and fact do not build: any recursive function sends the compiler into unbounded recursion (a Java StackOverflowError). sieve_bit stops with a NullPointerException."]
+
 [llvm-mos]
 kind = "6502"
 display = "llvm-mos -O3"

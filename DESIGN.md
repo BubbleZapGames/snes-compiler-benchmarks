@@ -98,7 +98,7 @@ The harness driver for each language (`harness/<lang>/`) provides the
 other two:
 
 ```c
-unsigned int result;            /* the runner reads this back */
+u16 result;                     /* the runner reads this back */
 int main(void) {
     *(volatile unsigned char *)0x4200 = 0;
     bench_init();
@@ -107,6 +107,14 @@ int main(void) {
     for (;;) {}
 }
 ```
+
+The C sources write 16-bit unsigned values as `u16`, from
+`harness/c/bench.h`: `unsigned int` where `int` is 16 bits, which is every
+entrant except JCC816, and `uint16_t` where it is wider. C only promises
+`int` at least 16 bits, and the benchmarks rely on 16-bit wraparound.
+`uint16_t` everywhere is not neutral either: vbcc65816 makes it `unsigned
+short` and compiles `short` slower than `int` (sum16 took 9,228 cycles
+against 5,324).
 
 `bench()` must not be computable at compile time: whatever decides how
 much work it does comes from data `bench_init()` writes at run time. The
@@ -247,6 +255,7 @@ specific.
 | [Calypsi](https://www.calypsi.cc/) 65816 (`--target SNES -O2 --speed`) | C | `5.18` | the GitHub release `.deb`, unpacked without root; free for hobby use |
 | [WDCTools](https://wdc65xx.com/WDCTools) WDC816CC | C | `3.49` | not fetched: a Windows installer, run under Wine; local-only |
 | [llvm-mos](https://github.com/llvm-mos/llvm-mos) (`-mcpu=mosw65816 -O3`) | C | SDK `v23.4.0` | the SDK's Linux release; 6502-family code in emulation mode, a baseline like cc65. Only `bench.c` gets the SDK's default LTO, so `bench()` stays a call from a separate unit |
+| [JCC816](https://github.com/Iacon1/JCC816) (`-O 2`) | C | a recorded `main` commit (no releases) | clone at the commit and use its prebuilt `JCC816.jar` (needs Java). It compiles the whole program at once and links through cc65's `cl65`; `int` is 24 bits |
 | hand-written assembly | asm | in repo | the "careful assembly programmer" reference |
 | ORCA/C | C | | considered: needs a SNES runtime shim |
 
@@ -378,15 +387,16 @@ snes-compiler-benchmarks/
   README.md  DESIGN.md  LICENSE
   toolchains.toml
   scb/                  runner package: cli, run, measure (Mesen-GDB), results, report, site
-  toolchains/           one adapter per compiler: r65 vbcc tcc cc65 calypsi wdc asm
+  toolchains/           one adapter per compiler: r65 vbcc tcc cc65 calypsi wdc llvm_mos jcc816 asm
   harness/
-    c/  main.c done.c stub.c
+    c/  main.c done.c stub.c bench.h
     r65/ main.r65 stub.r65
     asm/ main.asm stub.asm
     cc65/ crt0.s snes.cfg
     vbcc/ vcpr6502
     calypsi/ snes.scm …
     wdc/ snes.asm
+    jcc816/ cl65 header.xml
   suite/<name>/         bench.toml ref.py bench.c bench.r65 [bench.asm]
   results/              runs/ latest.json listings/
   site/                 templates, style.css, app.js

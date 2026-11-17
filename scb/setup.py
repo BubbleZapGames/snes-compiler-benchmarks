@@ -23,6 +23,7 @@ WLA_REPO = "https://github.com/vhelin/wla-dx"
 WLA_TAG = "v10.7"
 CC65_REPO = "https://github.com/cc65/cc65"
 PVS_REPO = "https://github.com/alekmaul/pvsneslib"
+JCC816_REPO = "https://github.com/Iacon1/JCC816"
 VBCC_URL = "http://www.ibaug.de/vbcc/vbcc65816_r2.zip"
 LLVM_MOS_URL = "https://github.com/llvm-mos/llvm-mos-sdk/releases/download/{v}/llvm-mos-linux.tar.xz"
 CALYPSI_URL = ("https://github.com/hth313/Calypsi-tool-chains/releases/download/"
@@ -145,8 +146,20 @@ def step_tcc(tc_dir, tcs):
     run(["make", "-C", home / "pvsneslib"], env=env)
 
 
+def step_jcc816(tc_dir, tcs):
+    # No releases: check out the pinned commit and use the jar committed with it.
+    from toolchains import jcc816
+    tc = next(t for t in tcs.values() if t.compiler == "jcc816")
+    home = jcc816.home(tc)
+    if (home / "JCC816.jar").exists():
+        return
+    run(["git", "clone", JCC816_REPO, home])
+    run(["git", "-C", home, "checkout", "--quiet", tc.opts["commit"]])
+
+
 STEPS = {"r65": step_r65, "wla": step_wla, "mesen": step_mesen, "vbcc": step_vbcc,
-         "calypsi": step_calypsi, "llvm_mos": step_llvm_mos, "cc65": step_cc65, "tcc": step_tcc}
+         "calypsi": step_calypsi, "llvm_mos": step_llvm_mos, "cc65": step_cc65, "tcc": step_tcc,
+         "jcc816": step_jcc816}
 
 
 def setup(only=None):

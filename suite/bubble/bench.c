@@ -1,11 +1,13 @@
 /* Bubble sort 64 bytes, then fold them into a checksum. */
+#include "bench.h"
+
 #define N 64
 
 unsigned char arr[N];
 
 void bench_init(void)
 {
-    unsigned int v = 1;
+    u16 v = 1;
     unsigned char i;
     for (i = 0; i < N; i++) {
         v = (v << 2) + v + 0x3619;
@@ -13,10 +15,10 @@ void bench_init(void)
     }
 }
 
-unsigned int bench(void)
+u16 bench(void)
 {
     unsigned char i, j, t;
-    unsigned int s = 0;
+    u16 s = 0;
     for (i = 0; i < N - 1; i++) {
         for (j = 0; j < N - 1 - i; j++) {
             if (arr[j] > arr[j + 1]) {

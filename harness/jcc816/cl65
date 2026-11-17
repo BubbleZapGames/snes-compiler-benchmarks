@@ -1,0 +1,5 @@
+#!/bin/sh
+# JCC816 assembles and links its whole program with a bare `cl65`, which
+# defaults to the c64 target and its library. Link against none.lib instead,
+# keep debug symbols, and write the map and labels the adapter reads.
+exec "$CC65_BIN/cl65" -t none -g -m map.txt -Ln labels.txt "$@"

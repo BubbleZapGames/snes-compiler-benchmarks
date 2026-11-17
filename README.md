@@ -19,6 +19,7 @@ built by the same toolchain.
 | `llvm-mos` | [llvm-mos](https://github.com/llvm-mos/llvm-mos), a 6502 baseline | SDK v23.4.0 |
 | `tcc` | tcc-65816 + 816-opt from [PVSnesLib](https://github.com/alekmaul/pvsneslib) | 4.7.1 |
 | `cc65` | [cc65](https://cc65.github.io/), a 6502 baseline | master |
+| `jcc816` | [JCC816](https://github.com/Iacon1/JCC816) | main @ cd0522a |
 | `asm` | hand-written WLA-DX assembly | |
 
 ## Quick start

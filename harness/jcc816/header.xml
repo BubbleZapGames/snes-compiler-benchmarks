@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- JCC816's ROM header. HiROM: its LoROM header code indexes past the end of
+     a 32 KB ROM. Its startup code puts S at $1EFF and jumps to main. -->
+<header>
+	<releaseInfo makerCode="SB" gameCode="SCB ">SCB BENCH</releaseInfo>
+	<revision specialVersion="0">0</revision>
+	<region>USA</region>
+	<cartConfig>
+		<mapMode fastROM="false" battery="false">hiROM</mapMode>
+		<addonChip>none</addonChip>
+	</cartConfig>
+</header>

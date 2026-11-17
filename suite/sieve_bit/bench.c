@@ -1,6 +1,8 @@
 /* Sieve of Eratosthenes over the odd numbers with one bit per flag, through a
  * bit-mask table: the primes up to 16001. The algorithm of c-bench-64's
  * sieve_bit.c, smaller. Returns the prime count. */
+#include "bench.h"
+
 #define SIZE 8000
 
 unsigned char flags[SIZE / 8 + 1];
@@ -11,19 +13,19 @@ void bench_init(void)
 {
 }
 
-unsigned char check_flag(unsigned int idx)
+unsigned char check_flag(u16 idx)
 {
     return flags[idx / 8] & bitv[idx & 7];
 }
 
-void clear_flag(unsigned int idx)
+void clear_flag(u16 idx)
 {
     flags[idx / 8] &= ~bitv[idx & 7];
 }
 
-unsigned int bench(void)
+u16 bench(void)
 {
-    unsigned int i, prime, k, count = 1;    /* 2 is prime */
+    u16 i, prime, k, count = 1;    /* 2 is prime */
 
     for (i = 0; i < SIZE / 8 + 1; i++)
         flags[i] = 0xff;

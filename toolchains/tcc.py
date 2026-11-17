@@ -28,7 +28,7 @@ HEADER = {"HIROMDEF": "", "FASTROMDEF": "", "ROMTITLE": "SCB TCC",
 def build(tc, src, work):
     pvs = home(tc)
     w = fresh(work)
-    for f in ("main.c", "done.c"):
+    for f in ("main.c", "done.c", "bench.h"):
         shutil.copy(config.HARNESS / "c" / f, w / f)
     shutil.copy(src, w / "bench.c")
     hdr = (pvs / "devkitsnes/include/hdr.asm.in").read_text()

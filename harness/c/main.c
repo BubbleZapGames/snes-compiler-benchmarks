@@ -1,12 +1,13 @@
 /* Shared driver for every C toolchain. bench() lives in its own translation
  * unit so no compiler can inline it here; the harness breaks on bench's
  * entry, steps out of it, and reads the cycle counter on both sides. */
+#include "bench.h"
 
 extern void bench_init(void);
-extern unsigned int bench(void);
+extern u16 bench(void);
 extern void done(void);
 
-unsigned int result;
+u16 result;
 
 int main(void)
 {

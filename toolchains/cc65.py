@@ -22,7 +22,7 @@ def version(tc):
 def build(tc, src, work):
     cc65 = home(tc)
     w = fresh(work)
-    for f in ("main.c", "done.c"):
+    for f in ("main.c", "done.c", "bench.h"):
         shutil.copy(config.HARNESS / "c" / f, w / f)
     shutil.copy(src, w / "bench.c")
     bin_ = cc65 / "bin"

@@ -1,8 +1,10 @@
 /* 16 frames of moving and bouncing 32 entities: an array of 9-byte structs. */
+#include "bench.h"
+
 #define N 32
 
 struct entity {
-    unsigned int x, y, vx, vy;
+    u16 x, y, vx, vy;
     unsigned char alive;
 };
 
@@ -10,7 +12,7 @@ struct entity ents[N];
 
 void bench_init(void)
 {
-    unsigned int i;
+    u16 i;
     for (i = 0; i < N; i++) {
         ents[i].x = (i << 3) - i;
         ents[i].y = (i << 2) + i;
@@ -20,9 +22,9 @@ void bench_init(void)
     }
 }
 
-unsigned int bench(void)
+u16 bench(void)
 {
-    unsigned int f, i, s = 0;
+    u16 f, i, s = 0;
     for (f = 0; f < 16; f++) {
         for (i = 0; i < N; i++) {
             if (ents[i].alive) {

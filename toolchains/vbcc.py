@@ -28,7 +28,7 @@ def _env(tc):
 
 def build(tc, src, work):
     w = fresh(work)
-    for f in ("main.c", "done.c"):
+    for f in ("main.c", "done.c", "bench.h"):
         shutil.copy(config.HARNESS / "c" / f, w / f)
     shutil.copy(src, w / "bench.c")
     env = _env(tc)

@@ -1,9 +1,9 @@
 {
  "schema": 1,
- "run_id": "2026-11-17-111428",
- "date": "2026-11-17T11:14:28Z",
- "label": "hand-written assembly reference",
- "harness_commit": "ac4a8973",
+ "run_id": "2026-11-17-173116",
+ "date": "2026-11-17T17:31:16Z",
+ "label": null,
+ "harness_commit": "668fa316",
  "emulator": {
   "name": "Mesen-GDB",
   "commit": "0858bc25"
@@ -126,6 +126,17 @@
    "language": "asm",
    "flags": [],
    "version": "WLA-DX v10.7a"
+  },
+  "jcc816": {
+   "compiler": "jcc816",
+   "display": "JCC816 -O2",
+   "language": "c",
+   "flags": [
+    "-O",
+    "2"
+   ],
+   "version": "main",
+   "commit": "cd0522a2"
   }
  },
  "benchmarks": {
@@ -244,6 +255,13 @@
     "status": "ok",
     "cycles": 3851,
     "size": 46,
+    "value": 15744,
+    "measured_in": "2026-11-17-111428"
+   },
+   "jcc816": {
+    "status": "ok",
+    "cycles": 40840,
+    "size": 324,
     "value": 15744
    }
   },
@@ -315,7 +333,14 @@
     "status": "ok",
     "cycles": 58525,
     "size": 107,
-    "value": 172
+    "value": 172,
+    "measured_in": "2026-11-17-111428"
+   },
+   "jcc816": {
+    "status": "wrong",
+    "cycles": 1141386,
+    "size": 445,
+    "value": 1019
    }
   },
   "bubble": {
@@ -386,6 +411,13 @@
     "status": "ok",
     "cycles": 48452,
     "size": 97,
+    "value": 11242,
+    "measured_in": "2026-11-17-111428"
+   },
+   "jcc816": {
+    "status": "ok",
+    "cycles": 562415,
+    "size": 751,
     "value": 11242
    }
   },
@@ -457,6 +489,13 @@
     "status": "ok",
     "cycles": 14662,
     "size": 150,
+    "value": 20831,
+    "measured_in": "2026-11-17-111428"
+   },
+   "jcc816": {
+    "status": "ok",
+    "cycles": 477687,
+    "size": 550,
     "value": 20831
    }
   },
@@ -528,6 +567,13 @@
     "status": "ok",
     "cycles": 7231,
     "size": 82,
+    "value": 72,
+    "measured_in": "2026-11-17-111428"
+   },
+   "jcc816": {
+    "status": "ok",
+    "cycles": 153750,
+    "size": 332,
     "value": 72
    }
   },
@@ -599,7 +645,14 @@
     "status": "ok",
     "cycles": 26125,
     "size": 177,
-    "value": 7994
+    "value": 7994,
+    "measured_in": "2026-11-17-111428"
+   },
+   "jcc816": {
+    "status": "wrong",
+    "cycles": 106853,
+    "size": 1363,
+    "value": 5952
    }
   },
   "fib": {
@@ -668,7 +721,12 @@
     "status": "ok",
     "cycles": 94192,
     "size": 25,
-    "value": 987
+    "value": 987,
+    "measured_in": "2026-11-17-111428"
+   },
+   "jcc816": {
+    "status": "build_fail",
+    "error": "\tat C99Compiler.CompilerNodes.Expressions.PostfixExpressionNode.canCall(PostfixExpressionNode.java:228)\n\tat C99Compiler.CompilerNodes.Expressions.BinaryExpressionNode.canCall(BinaryExpressionNode.java:82)\n\tat C99Compiler.CompilerNodes.Statements.JumpStatementNode.canCall(JumpStatementNode.java:69)\n\tat C99Compiler.CompilerNodes.Statements.CompoundStatementNode.canCall(CompoundStatementNode.java:64)\n\tat C99Compiler.CompilerNodes.FunctionDefinitionNode.canCall(FunctionDefinitionNode.java:301)\n\tat C99Compiler.CompilerNodes.Expressions.PostfixExpressionNode.canCall(PostfixExpressionNode.java:228)\n\tat C99Compiler.CompilerNodes.Expressions.BinaryExpressionNode.canCall(BinaryExpressionNode.java:82)\n\tat C99Compiler.CompilerNodes.Statements.JumpStatementNode.canCall(JumpStatementNode.java:69)\n\tat C99Compiler.CompilerNodes.Statements.CompoundStatementNode.canCall(CompoundStatementNode.java:64)\n\tat C99Compiler.CompilerNodes.FunctionDefinitionNode.canCall(FunctionDefinitionNode.java:301)\n\tat C99Compiler.CompilerNodes.Expressions.PostfixExpressionNode.canCall(PostfixExpressionNode.java:228)\n\tat C99Compiler.CompilerNodes.Expressions.BinaryExpressionNode.canCall(BinaryExpressionNode.java:82)"
    }
   },
   "popcount": {
@@ -739,6 +797,13 @@
     "status": "ok",
     "cycles": 16205,
     "size": 66,
+    "value": 1021,
+    "measured_in": "2026-11-17-111428"
+   },
+   "jcc816": {
+    "status": "ok",
+    "cycles": 216522,
+    "size": 390,
     "value": 1021
    }
   },
@@ -810,6 +875,13 @@
     "status": "ok",
     "cycles": 1725,
     "size": 98,
+    "value": 18923,
+    "measured_in": "2026-11-17-111428"
+   },
+   "jcc816": {
+    "status": "ok",
+    "cycles": 20746,
+    "size": 462,
     "value": 18923
    }
   },
@@ -881,6 +953,13 @@
     "status": "ok",
     "cycles": 6736,
     "size": 103,
+    "value": 63868,
+    "measured_in": "2026-11-17-111428"
+   },
+   "jcc816": {
+    "status": "ok",
+    "cycles": 93361,
+    "size": 379,
     "value": 63868
    }
   },
@@ -952,7 +1031,14 @@
     "status": "ok",
     "cycles": 25208,
     "size": 529,
-    "value": 42852
+    "value": 42852,
+    "measured_in": "2026-11-17-111428"
+   },
+   "jcc816": {
+    "status": "wrong",
+    "cycles": 313971,
+    "size": 1296,
+    "value": 56629
    }
   },
   "crc32": {
@@ -1023,6 +1109,13 @@
     "status": "ok",
     "cycles": 180819,
     "size": 346,
+    "value": 49239,
+    "measured_in": "2026-11-17-111428"
+   },
+   "jcc816": {
+    "status": "ok",
+    "cycles": 1446137,
+    "size": 551,
     "value": 49239
    }
   },
@@ -1094,7 +1187,14 @@
     "status": "ok",
     "cycles": 470451,
     "size": 559,
-    "value": 2937
+    "value": 2937,
+    "measured_in": "2026-11-17-111428"
+   },
+   "jcc816": {
+    "status": "wrong",
+    "cycles": 10621714,
+    "size": 2228,
+    "value": 60341
    }
   },
   "fact": {
@@ -1161,7 +1261,12 @@
     "status": "ok",
     "cycles": 213322,
     "size": 290,
-    "value": 12931
+    "value": 12931,
+    "measured_in": "2026-11-17-111428"
+   },
+   "jcc816": {
+    "status": "build_fail",
+    "error": "\tat C99Compiler.CompilerNodes.Expressions.MultiplicativeExpressionNode.canCall(MultiplicativeExpressionNode.java:98)\n\tat C99Compiler.CompilerNodes.Statements.JumpStatementNode.canCall(JumpStatementNode.java:69)\n\tat C99Compiler.CompilerNodes.Statements.SelectionStatementNode.canCall(SelectionStatementNode.java:109)\n\tat C99Compiler.CompilerNodes.Statements.CompoundStatementNode.canCall(CompoundStatementNode.java:64)\n\tat C99Compiler.CompilerNodes.FunctionDefinitionNode.canCall(FunctionDefinitionNode.java:301)\n\tat C99Compiler.CompilerNodes.Expressions.PostfixExpressionNode.canCall(PostfixExpressionNode.java:228)\n\tat C99Compiler.CompilerNodes.Expressions.BinaryExpressionNode.canCall(BinaryExpressionNode.java:82)\n\tat C99Compiler.CompilerNodes.Expressions.MultiplicativeExpressionNode.canCall(MultiplicativeExpressionNode.java:98)\n\tat C99Compiler.CompilerNodes.Statements.JumpStatementNode.canCall(JumpStatementNode.java:69)\n\tat C99Compiler.CompilerNodes.Statements.SelectionStatementNode.canCall(SelectionStatementNode.java:109)\n\tat C99Compiler.CompilerNodes.Statements.CompoundStatementNode.canCall(CompoundStatementNode.java:64)\n\tat C99Compiler.CompilerNodes.FunctionDefinitionNode.canCall(FunctionDefinitionNode.java:301)"
    }
   },
   "sieve_bit": {
@@ -1232,7 +1337,12 @@
     "status": "ok",
     "cycles": 909323,
     "size": 193,
-    "value": 1863
+    "value": 1863,
+    "measured_in": "2026-11-17-111428"
+   },
+   "jcc816": {
+    "status": "build_fail",
+    "error": "\tat C99Compiler.CompilerNodes.Expressions.AssignmentExpressionNode.getAssemblyAndState(AssignmentExpressionNode.java:187)\n\tat Shared.Assemblable.apply(Assemblable.java:51)\n\tat C99Compiler.CompilerNodes.Statements.SequencePointStatementNode.applyWithRegistered(SequencePointStatementNode.java:53)\n\tat C99Compiler.CompilerNodes.Statements.SequencePointStatementNode.getAssemblyAndStateWithRegistered(SequencePointStatementNode.java:80)\n\tat C99Compiler.CompilerNodes.Statements.ExpressionStatementNode.getAssemblyAndState(ExpressionStatementNode.java:65)\n\tat C99Compiler.CompilerNodes.Statements.CompoundStatementNode.getAssemblyAndState(CompoundStatementNode.java:102)\n\tat C99Compiler.CompilerNodes.FunctionDefinitionNode.getAssemblyAndState(FunctionDefinitionNode.java:390)\n\tat Shared.Assemblable.getAssembly(Assemblable.java:67)\n\tat AsmBuilder.AsmBuilder.getAssembly(AsmBuilder.java:410)\n\tat AsmBuilder.AsmBuilder.build(AsmBuilder.java:462)\n\tat Executables.JCC816.trueMain(JCC816.java:467)\n\tat Executables.JCC816.main(JCC816.java:496)"
    }
   }
  }

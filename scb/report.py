@@ -1,10 +1,13 @@
 """Markdown tables from a run record."""
 
-from scb import results
+from scb import results, toolchain
 
 
 def markdown(rec, tcs=None):
-    tcs = tcs or list(rec["toolchains"])
+    if tcs is None:
+        # toolchains.toml order; anything only the record knows goes last
+        order = list(toolchain.load())
+        tcs = sorted(rec["toolchains"], key=lambda t: order.index(t) if t in order else len(order))
     benches = list(rec["cells"])
     lines = [f"Run `{rec['run_id']}`. Each cell shows the value and its ratio to the "
              "best result in its row (1.00x = best).", ""]

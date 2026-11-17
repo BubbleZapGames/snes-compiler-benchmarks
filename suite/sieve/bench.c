@@ -1,4 +1,6 @@
 /* Sieve of Eratosthenes over 1024 byte flags; returns the prime count. */
+#include "bench.h"
+
 #define N 1024
 
 unsigned char flags[N];
@@ -7,9 +9,9 @@ void bench_init(void)
 {
 }
 
-unsigned int bench(void)
+u16 bench(void)
 {
-    unsigned int i, j, count = 0;
+    u16 i, j, count = 0;
     for (i = 0; i < N; i++)
         flags[i] = 0;
     for (i = 2; i < N; i++) {
