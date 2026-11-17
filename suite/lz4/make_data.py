@@ -1,7 +1,7 @@
 """The lz4 benchmark's input: a 1024-byte buffer and its LZ4 block encoding.
 
     python3 suite/lz4/make_data.py          # print the compressed size
-    python3 suite/lz4/make_data.py --write  # rewrite the tables in bench.c and bench.r65
+    python3 suite/lz4/make_data.py --write  # rewrite the tables in bench.c, bench.r65 and bench.asm
 
 The buffer mixes what SNES data looks like: tilemap rows that repeat with
 small changes, text, noise that stays literal, and long runs of one byte
@@ -126,6 +126,13 @@ def table(block, indent, per_line=16):
     return "\n".join(rows)
 
 
+def db_table(block, indent, per_line=16):
+    rows = []
+    for k in range(0, len(block), per_line):
+        rows.append(indent + ".db " + ", ".join(f"${b:02X}" for b in block[k:k + per_line]))
+    return "\n".join(rows)
+
+
 def write():
     src = original()
     block = compress(src)
@@ -143,6 +150,12 @@ def write():
     text = re.sub(r"(// begin data\n).*?(    // end data)",
                   lambda m: m.group(1) + table(block, "    ") + "\n" + m.group(2), text, flags=re.S)
     r.write_text(text)
+    a = HERE / "bench.asm"
+    text = a.read_text()
+    text = re.sub(r"\.DEFINE LZ_N \d+", f".DEFINE LZ_N {len(block)}", text)
+    text = re.sub(r"(; begin data\n).*?(; end data)",
+                  lambda m: m.group(1) + db_table(block, "    ") + "\n" + m.group(2), text, flags=re.S)
+    a.write_text(text)
 
 
 if __name__ == "__main__":
@@ -152,4 +165,4 @@ if __name__ == "__main__":
     print(f"{len(src)} bytes -> {len(block)} bytes")
     if "--write" in sys.argv:
         write()
-        print("rewrote bench.c and bench.r65")
+        print("rewrote bench.c, bench.r65 and bench.asm")

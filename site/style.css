@@ -163,6 +163,7 @@ footer.site p { margin: 0; max-width: 48rem; }
 .col-off { display: none; }
 
 /* the two boards */
+.ref-note { margin: 1rem 0 0; color: var(--ink-2); font-size: 0.92rem; max-width: 52rem; padding-left: 0.75rem; border-left: 3px solid var(--accent); }
 .boards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 30rem), 1fr)); gap: 0 3rem; }
 .board, .matrix { min-width: 0; }
 .board .cov-note:empty { display: none; }
@@ -180,6 +181,10 @@ ol.bars .bl a:hover { text-decoration: underline; }
 ol.bars .bt { display: flex; align-items: center; gap: 0.5rem; min-height: 22px; border-left: 1px solid var(--axis); min-width: 0; }
 ol.bars .bar { flex: none; height: 18px; background: var(--accent); border-radius: 0 4px 4px 0; min-width: 2px; }
 ol.bars li.k-6502 .bar { background: var(--baseline-bar); }
+ol.bars li.k-reference .bar {
+  background: repeating-linear-gradient(135deg, var(--accent) 0 3px, transparent 3px 6px);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
 ol.bars .bv { font-family: var(--mono); font-size: 0.82rem; white-space: nowrap; color: var(--ink); font-variant-numeric: tabular-nums; }
 ol.bars li.none .bt { padding-left: 0.5rem; flex-wrap: wrap; }
 @media (max-width: 34rem) {
@@ -228,6 +233,7 @@ table.heat th[scope=row] { position: sticky; left: 0; z-index: 1; background: va
 table.heat thead th:first-child { position: sticky; left: 0; z-index: 2; }
 table.heat thead th:not(:first-child) { text-align: right; font-family: var(--mono); font-weight: 500; }
 table.heat thead th.k-6502 button::after { content: " ·6502"; color: var(--muted); font-size: 0.75em; }
+table.heat thead th.k-reference button::after { content: " ·ref"; color: var(--muted); font-size: 0.75em; }
 table.heat td { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; border-left: 2px solid var(--surface); }
 table.heat td .r { display: block; font-family: var(--mono); font-weight: 500; font-size: 0.85rem; }
 table.heat td .v { display: block; font-family: var(--mono); font-size: 0.72rem; opacity: 0.78; }

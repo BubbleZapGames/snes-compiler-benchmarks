@@ -129,5 +129,6 @@ language = "asm"
 flags = []
 reference = true   # joins the leaderboard once it covers every benchmark
 license = "MIT"
-placement = "chosen per benchmark by the author, like any assembly programmer would"
-notes = ["The reference a careful assembly programmer would write. WLA-DX."]
+placement = "arrays in low RAM like the other versions; scalars and pointers in direct page where the author chose"
+notes = ["The reference a careful 65816 programmer would write by hand, assembled with WLA-DX.",
+         "Same algorithm, inputs, data sizes and result as the C and R65 versions; any CPU or SNES feature is fair (processor widths, direct page, MVN, the hardware multiplier and divider); a different algorithm is not."]

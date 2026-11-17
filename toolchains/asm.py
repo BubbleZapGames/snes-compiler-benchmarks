@@ -11,7 +11,12 @@ def available(tc):
 
 
 def version(tc):
-    return {"version": "WLA-DX"}
+    """The assembler's own banner, e.g. "WLA-DX v10.7a"."""
+    import re
+    import subprocess
+    p = subprocess.run([str(config.wla_bin() / "wla-65816")], capture_output=True, text=True)
+    m = re.search(r"Assembler (v[\w.]+)", p.stdout + p.stderr)
+    return {"version": f"WLA-DX {m.group(1)}" if m else "WLA-DX"}
 
 
 def build(tc, src, work):

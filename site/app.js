@@ -146,7 +146,8 @@
       var html = scored.map(function (s) {
         var k = data.kinds[s.t];
         var cls = k && k !== "65816" ? "k-" + k : "";
-        var chip = k === "6502" ? ' <span class="chip">6502</span>' : "";
+        var chip = k === "6502" ? ' <span class="chip">6502</span>'
+                 : k === "reference" ? ' <span class="chip">ref</span>' : "";
         var name = '<a href="toolchains/#' + esc(s.t) + '">' + esc(data.labels[s.t]) + "</a>" + chip;
         if (s.g === null) {
           return '<li class="none ' + cls + '"><span class="bl">' + name + '</span><span class="bt">' +

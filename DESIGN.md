@@ -119,6 +119,17 @@ Inputs are generated, not stored. Most kernels use the shared 16-bit LCG
 `v = v*5 + 0x3619`, which `ref.py` and every source reproduce, so no
 benchmark needs a large data blob.
 
+**Hand-written assembly** (`bench.asm`) is the reference a careful 65816
+programmer would write. It keeps the same algorithm, inputs, data sizes,
+array placement (low RAM) and result as the other versions. Anything the CPU
+and the SNES offer is fair, as it is for a compiler: register and
+processor-width choices, direct-page variables, `MVN`/`MVP`, the hardware
+multiplier and divider, unrolling. A different algorithm is not fair: a
+lookup-table popcount or CRC, a closed form, or a constant answer. Moving
+timed work into `bench_init()` is not fair either. The driver
+(`harness/asm/main.asm`) calls both routines with `JSR` in native mode, with
+A, X and Y 16-bit, D = 0 and DBR = 0. `bench` returns its result in a 16-bit A.
+
 A toolchain that cannot express a benchmark marks the cell `unsupported`,
 with a reason in `bench.toml`
 (`unsupported = { "r65-fs" = "FixedStack ABI rejects recursion" }`). It is

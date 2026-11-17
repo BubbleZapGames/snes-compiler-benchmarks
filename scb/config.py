@@ -13,7 +13,6 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 SUITE = ROOT / "suite"
 HARNESS = ROOT / "harness"
-BUILD = ROOT / "build"
 SITE_SRC = ROOT / "site"
 SITE_OUT = ROOT / "_site"
 
@@ -63,3 +62,5 @@ def wla_bin():
 
 # SCB_RESULTS points a run somewhere other than results/ (for scratch runs).
 RESULTS = Path(os.environ.get("SCB_RESULTS") or ROOT / "results")
+# SCB_BUILD gives a run its own build tree (parallel runs must not share one).
+BUILD = Path(os.environ.get("SCB_BUILD") or ROOT / "build")
