@@ -1,0 +1,65 @@
+// Breadth-first search over a 32x32 tile map, as in enemy pathfinding: a
+// distance map from one start cell, with a 256-entry ring-buffer queue.
+// Returns the sum of distances over the cells reached.
+#[lowram]
+static mut GRID: [u8; 1024];    // 0 = floor, 1 = wall; the border is wall
+#[lowram]
+static mut DIST: [u8; 1024];    // 0xFF = not reached
+#[lowram]
+static mut QUEUE: [u16; 256];
+#[lowram]
+static mut START: u16;
+#[lowram]
+static mut TAIL: u16;
+
+#[inline(never)]
+fn bench_init() {
+    let mut v: u16 = 1;
+    let mut i: u16 = 0;
+    while i < 1024 {
+        v = (v << 2) + v + 0x3619;
+        let x: u16 = i & 31;
+        let y: u16 = i >> 5;
+        if x == 0 || x == 31 || y == 0 || y == 31 || ((v >> 8) & 3) == 0 {
+            GRID[i] = 1;
+        } else {
+            GRID[i] = 0;
+        }
+        i = i + 1;
+    }
+    START = 33;
+    GRID[START] = 0;
+}
+
+fn visit(n: u16, d: u8) {
+    if GRID[n] == 0 && DIST[n] == 0xFF {
+        DIST[n] = d;
+        QUEUE[TAIL] = n;
+        TAIL = (TAIL + 1) & 255;
+    }
+}
+
+#[inline(never)]
+fn bench() -> u16 {
+    let mut i: u16 = 0;
+    while i < 1024 {
+        DIST[i] = 0xFF;
+        i = i + 1;
+    }
+    DIST[START] = 0;
+    QUEUE[0] = START;
+    let mut head: u16 = 0;
+    TAIL = 1;
+    let mut s: u16 = 0;
+    while head != TAIL {
+        let c: u16 = QUEUE[head];
+        head = (head + 1) & 255;
+        s = s + (DIST[c] as u16);
+        let d: u8 = DIST[c] + 1;
+        visit(c - 32, d);
+        visit(c - 1, d);
+        visit(c + 1, d);
+        visit(c + 32, d);
+    }
+    return s;
+}

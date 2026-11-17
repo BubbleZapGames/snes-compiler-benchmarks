@@ -180,7 +180,14 @@ byte sum. `suite/lz4/make_data.py` generates the input and the tables in
 both sources. The input covers extended literal and match lengths,
 overlapping copies and a final literal-only sequence.
 
-The rest are candidates. A later pass picks about 5.
+`bfs_grid` is in the suite too. It builds a 32×32 tile map in
+`bench_init()` (border walls, about a quarter of the interior walls, from
+the suite LCG). `bench()` then runs a breadth-first search from cell (1,1)
+with a 256-entry ring-buffer queue, filling a byte distance map, and
+returns the sum of the distances. The ring wraps twice over the 666 cells
+reached; its longest occupancy is 34.
+
+The rest are candidates. A later pass picks about 4.
 
 | name | exercises |
 |---|---|
@@ -195,7 +202,6 @@ The rest are candidates. A later pass picks about 5.
 | `far_table` | reading a constant table in another ROM bank (long addressing, DBR handling) |
 | `calls` | many small calls with 1–3 arguments (each ABI's call overhead) |
 | `rotate_lut` | sin/cos LUT and signed 8×8 multiply (rotating points) |
-| `bfs_grid` | breadth-first search on a 32×32 tile grid with a ring-buffer queue |
 
 The hardware multiply/divide registers (`$4202`/`$4204`) are not off
 limits. A compiler or runtime that uses them on its own gets the credit.

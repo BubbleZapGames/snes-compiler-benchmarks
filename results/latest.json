@@ -1,9 +1,9 @@
 {
  "schema": 1,
- "run_id": "2026-11-17-111428",
- "date": "2026-11-17T11:14:28Z",
- "label": "hand-written assembly reference",
- "harness_commit": "ac4a8973",
+ "run_id": "2026-11-17-193431",
+ "date": "2026-11-17T19:34:31Z",
+ "label": null,
+ "harness_commit": "668fa316",
  "emulator": {
   "name": "Mesen-GDB",
   "commit": "0858bc25"
@@ -89,7 +89,7 @@
   },
   "llvm-mos": {
    "compiler": "llvm_mos",
-   "display": "llvm-mos -O3 (6502 baseline)",
+   "display": "llvm-mos -O3",
    "language": "c",
    "flags": [
     "-mcpu=mosw65816",
@@ -110,7 +110,7 @@
   },
   "cc65": {
    "compiler": "cc65",
-   "display": "cc65 -Oirs (6502 baseline)",
+   "display": "cc65 -Oirs",
    "language": "c",
    "flags": [
     "-Oirs",
@@ -173,6 +173,9 @@
   },
   "sieve_bit": {
    "expected": 1863
+  },
+  "bfs_grid": {
+   "expected": 22089
   }
  },
  "cells": {
@@ -244,7 +247,8 @@
     "status": "ok",
     "cycles": 3851,
     "size": 46,
-    "value": 15744
+    "value": 15744,
+    "measured_in": "2026-11-17-111428"
    }
   },
   "sieve": {
@@ -315,7 +319,8 @@
     "status": "ok",
     "cycles": 58525,
     "size": 107,
-    "value": 172
+    "value": 172,
+    "measured_in": "2026-11-17-111428"
    }
   },
   "bubble": {
@@ -386,7 +391,8 @@
     "status": "ok",
     "cycles": 48452,
     "size": 97,
-    "value": 11242
+    "value": 11242,
+    "measured_in": "2026-11-17-111428"
    }
   },
   "crc16": {
@@ -457,7 +463,8 @@
     "status": "ok",
     "cycles": 14662,
     "size": 150,
-    "value": 20831
+    "value": 20831,
+    "measured_in": "2026-11-17-111428"
    }
   },
   "copy": {
@@ -528,7 +535,8 @@
     "status": "ok",
     "cycles": 7231,
     "size": 82,
-    "value": 72
+    "value": 72,
+    "measured_in": "2026-11-17-111428"
    }
   },
   "entities": {
@@ -599,7 +607,8 @@
     "status": "ok",
     "cycles": 26125,
     "size": 177,
-    "value": 7994
+    "value": 7994,
+    "measured_in": "2026-11-17-111428"
    }
   },
   "fib": {
@@ -668,7 +677,8 @@
     "status": "ok",
     "cycles": 94192,
     "size": 25,
-    "value": 987
+    "value": 987,
+    "measured_in": "2026-11-17-111428"
    }
   },
   "popcount": {
@@ -739,7 +749,8 @@
     "status": "ok",
     "cycles": 16205,
     "size": 66,
-    "value": 1021
+    "value": 1021,
+    "measured_in": "2026-11-17-111428"
    }
   },
   "dot": {
@@ -810,7 +821,8 @@
     "status": "ok",
     "cycles": 1725,
     "size": 98,
-    "value": 18923
+    "value": 18923,
+    "measured_in": "2026-11-17-111428"
    }
   },
   "ptrsum": {
@@ -881,7 +893,8 @@
     "status": "ok",
     "cycles": 6736,
     "size": 103,
-    "value": 63868
+    "value": 63868,
+    "measured_in": "2026-11-17-111428"
    }
   },
   "lz4": {
@@ -952,7 +965,8 @@
     "status": "ok",
     "cycles": 25208,
     "size": 529,
-    "value": 42852
+    "value": 42852,
+    "measured_in": "2026-11-17-111428"
    }
   },
   "crc32": {
@@ -1023,7 +1037,8 @@
     "status": "ok",
     "cycles": 180819,
     "size": 346,
-    "value": 49239
+    "value": 49239,
+    "measured_in": "2026-11-17-111428"
    }
   },
   "pi": {
@@ -1094,7 +1109,8 @@
     "status": "ok",
     "cycles": 470451,
     "size": 559,
-    "value": 2937
+    "value": 2937,
+    "measured_in": "2026-11-17-111428"
    }
   },
   "fact": {
@@ -1161,7 +1177,8 @@
     "status": "ok",
     "cycles": 213322,
     "size": 290,
-    "value": 12931
+    "value": 12931,
+    "measured_in": "2026-11-17-111428"
    }
   },
   "sieve_bit": {
@@ -1232,7 +1249,70 @@
     "status": "ok",
     "cycles": 909323,
     "size": 193,
-    "value": 1863
+    "value": 1863,
+    "measured_in": "2026-11-17-111428"
+   }
+  },
+  "bfs_grid": {
+   "r65-fs": {
+    "status": "ok",
+    "cycles": 276667,
+    "size": 334,
+    "value": 22089
+   },
+   "r65": {
+    "status": "ok",
+    "cycles": 376218,
+    "size": 379,
+    "value": 22089
+   },
+   "vbcc": {
+    "status": "ok",
+    "cycles": 259546,
+    "size": 858,
+    "value": 22089
+   },
+   "vbcc-nu": {
+    "status": "ok",
+    "cycles": 278994,
+    "size": 591,
+    "value": 22089
+   },
+   "calypsi": {
+    "status": "ok",
+    "cycles": 301576,
+    "size": 326,
+    "value": 22089
+   },
+   "wdc": {
+    "status": "ok",
+    "cycles": 394936,
+    "size": 365,
+    "value": 22089
+   },
+   "llvm-mos": {
+    "status": "ok",
+    "cycles": 376433,
+    "size": 881,
+    "value": 22089
+   },
+   "tcc": {
+    "status": "ok",
+    "cycles": 421481,
+    "size": 520,
+    "value": 22089
+   },
+   "cc65": {
+    "status": "ok",
+    "cycles": 965291,
+    "size": 837,
+    "value": 22089
+   },
+   "asm": {
+    "status": "ok",
+    "cycles": 106352,
+    "size": 358,
+    "value": 22089
    }
   }
  }

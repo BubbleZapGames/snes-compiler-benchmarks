@@ -1,0 +1,3 @@
+description = "Breadth-first search over a 32x32 tile map from one start cell, with a 256-entry ring-buffer queue; returns the sum of distances."
+category = "workload"
+tags = ["grid", "queue", "byte-array", "call", "branch"]
