@@ -1,0 +1,619 @@
+;vcprmin=10000
+	section	"DONTMERGE_text.far.bench_init.0","acrx"
+	a16
+	x16
+	global	_bench_init
+_bench_init:
+	rtl
+; stacksize=0+??
+;vcprmin=10000
+	section	"DONTMERGE_text.far.bench.0","acrx"
+	a16
+	x16
+	global	_bench
+_bench:
+	phy
+	stz	r2
+	stz	r4
+	stz	r11
+l63:
+	lda	#<l1
+	clc
+	adc	r2
+	tax
+	inc	r2
+	lda	!0,x
+	sta	r31
+	and	#255
+	sta	r8
+	cmp	#32768
+	ror
+	cmp	#32768
+	ror
+	cmp	#32768
+	ror
+	cmp	#32768
+	ror
+	sta	r1
+	cmp	#15
+	bne	l70
+	lda	#<l1
+	clc
+	adc	r2
+	sta	r3
+l64:
+	ldx	r3
+	inc	r2
+	inc	r3
+	lda	!0,x
+	sta	r31
+	and	#255
+	tax
+	lda	r1
+	clc
+	stx	r30
+	adc	r30
+	sta	r1
+	lda	r31
+	sep	#32
+	a8
+	cmp	#255
+	a16
+	rep	#32
+	beq	l64
+l70:
+	lda	r1
+	beq	l71
+	lda	#<_out
+	clc
+	adc	r4
+	sta	r5
+	lda	#<l1
+	clc
+	adc	r2
+	sta	r7
+l65:
+	ldx	r7
+	inc	r2
+	inc	r7
+	lda	r5
+	sta	r0
+	inc	r4
+	inc	r5
+	sep	#32
+	a8
+	lda	!0,x
+	sta	(r0)
+	a16
+	rep	#32
+	dec	r1
+	lda	r1
+	bne	l65
+l71:
+	lda	r2
+	cmp	#375
+	bcs	l69
+	lda	#<l1
+	clc
+	adc	r2
+	tax
+	lda	#<1+l1
+	clc
+	adc	r2
+	sta	r31
+	lda	(r31)
+	and	#255
+	sta	r31
+	xba
+	and	#65280
+	sta	r0
+	lda	!0,x
+	and	#255
+	ora	r0
+	sta	r9
+	inc	r2
+	inc	r2
+	lda	r8
+	and	#15
+	sta	r1
+	cmp	#15
+	bne	l72
+	lda	#<l1
+	clc
+	adc	r2
+	sta	r6
+l66:
+	ldx	r6
+	inc	r2
+	inc	r6
+	lda	!0,x
+	sta	r31
+	and	#255
+	tax
+	lda	r1
+	clc
+	stx	r30
+	adc	r30
+	sta	r1
+	lda	r31
+	sep	#32
+	a8
+	cmp	#255
+	a16
+	rep	#32
+	beq	l66
+l72:
+	lda	r1
+	clc
+	adc	#4
+	sta	r1
+	cmp	#0
+	beq	l63
+	lda	#<_out
+	sec
+	sbc	r9
+	sta	r31
+	lda	#<_out
+	clc
+	adc	r4
+	sta	r0
+	lda	r31
+	clc
+	adc	r4
+	tax
+l67:
+	sep	#32
+	a8
+	lda	!0,x
+	sta	(r0)
+	a16
+	rep	#32
+	inc	r4
+	inx
+	inc	r0
+	dec	r1
+	lda	r1
+	bne	l67
+	bra	l63
+l69:
+	lda	r4
+	beq	l74
+	lda	#<_out
+	sta	r3
+	lda	r4
+	sta	r5
+	lda	r3
+	sta	1,s
+	tax
+l62:
+	lda	!0,x
+	and	#255
+	clc
+	adc	r11
+	sta	r11
+	inx
+	dec	r5
+	lda	r5
+	bne	l62
+l74:
+	lda	r11
+	ply
+	rtl
+; stacksize=0+??
+	global	_out
+	section	"DONTMERGE_bss.near.out.0","aurw"
+_out:
+	reserve	1024
+	section	"DONTMERGE_rodata.near.lz.1","adr"
+l1:
+	db	129
+	db	32
+	db	33
+	db	34
+	db	35
+	db	36
+	db	80
+	db	38
+	db	39
+	db	8
+	db	0
+	db	26
+	db	37
+	db	8
+	db	0
+	db	27
+	db	64
+	db	16
+	db	0
+	db	2
+	db	32
+	db	0
+	db	44
+	db	64
+	db	81
+	db	40
+	db	0
+	db	9
+	db	56
+	db	0
+	db	18
+	db	82
+	db	72
+	db	0
+	db	19
+	db	64
+	db	80
+	db	0
+	db	243
+	db	3
+	db	54
+	db	68
+	db	141
+	db	249
+	db	22
+	db	66
+	db	69
+	db	78
+	db	67
+	db	72
+	db	77
+	db	65
+	db	82
+	db	75
+	db	83
+	db	58
+	db	32
+	db	0
+	db	1
+	db	0
+	db	15
+	db	113
+	db	0
+	db	1
+	db	22
+	db	80
+	db	129
+	db	0
+	db	22
+	db	65
+	db	145
+	db	0
+	db	30
+	db	81
+	db	105
+	db	0
+	db	25
+	db	65
+	db	177
+	db	0
+	db	16
+	db	65
+	db	185
+	db	0
+	db	27
+	db	82
+	db	193
+	db	0
+	db	149
+	db	166
+	db	118
+	db	134
+	db	215
+	db	105
+	db	69
+	db	146
+	db	19
+	db	153
+	db	122
+	db	0
+	db	53
+	db	76
+	db	90
+	db	52
+	db	126
+	db	0
+	db	5
+	db	8
+	db	0
+	db	2
+	db	248
+	db	0
+	db	28
+	db	66
+	db	0
+	db	1
+	db	31
+	db	80
+	db	16
+	db	1
+	db	1
+	db	20
+	db	66
+	db	32
+	db	1
+	db	24
+	db	81
+	db	48
+	db	1
+	db	47
+	db	66
+	db	82
+	db	16
+	db	1
+	db	9
+	db	214
+	db	55
+	db	74
+	db	169
+	db	131
+	db	198
+	db	24
+	db	178
+	db	178
+	db	176
+	db	170
+	db	140
+	db	242
+	db	241
+	db	6
+	db	1
+	db	15
+	db	140
+	db	0
+	db	2
+	db	6
+	db	149
+	db	0
+	db	31
+	db	67
+	db	93
+	db	1
+	db	4
+	db	1
+	db	165
+	db	1
+	db	17
+	db	80
+	db	173
+	db	1
+	db	22
+	db	81
+	db	173
+	db	1
+	db	31
+	db	67
+	db	141
+	db	1
+	db	6
+	db	0
+	db	221
+	db	1
+	db	24
+	db	67
+	db	221
+	db	1
+	db	17
+	db	82
+	db	229
+	db	1
+	db	255
+	db	5
+	db	235
+	db	209
+	db	79
+	db	195
+	db	8
+	db	95
+	db	22
+	db	164
+	db	108
+	db	82
+	db	209
+	db	79
+	db	194
+	db	4
+	db	78
+	db	192
+	db	249
+	db	69
+	db	82
+	db	32
+	db	164
+	db	1
+	db	1
+	db	15
+	db	8
+	db	0
+	db	8
+	db	31
+	db	68
+	db	0
+	db	2
+	db	5
+	db	25
+	db	80
+	db	72
+	db	2
+	db	26
+	db	81
+	db	88
+	db	2
+	db	26
+	db	68
+	db	104
+	db	2
+	db	31
+	db	82
+	db	120
+	db	2
+	db	3
+	db	248
+	db	10
+	db	68
+	db	37
+	db	38
+	db	39
+	db	19
+	db	153
+	db	52
+	db	58
+	db	90
+	db	252
+	db	37
+	db	243
+	db	246
+	db	5
+	db	81
+	db	207
+	db	65
+	db	127
+	db	180
+	db	186
+	db	217
+	db	118
+	db	136
+	db	224
+	db	153
+	db	202
+	db	1
+	db	79
+	db	66
+	db	76
+	db	79
+	db	67
+	db	168
+	db	0
+	db	16
+	db	11
+	db	233
+	db	1
+	db	9
+	db	233
+	db	2
+	db	16
+	db	69
+	db	241
+	db	2
+	db	31
+	db	80
+	db	201
+	db	2
+	db	2
+	db	79
+	db	81
+	db	39
+	db	32
+	db	69
+	db	132
+	db	1
+	db	9
+	db	2
+	db	49
+	db	3
+	db	22
+	db	82
+	db	49
+	db	3
+	db	249
+	db	11
+	db	69
+	db	55
+	db	75
+	db	174
+	db	158
+	db	77
+	db	184
+	db	207
+	db	66
+	db	132
+	db	203
+	db	47
+	db	35
+	db	232
+	db	192
+	db	250
+	db	28
+	db	198
+	db	20
+	db	157
+	db	74
+	db	168
+	db	130
+	db	195
+	db	7
+	db	92
+	db	178
+	db	0
+	db	79
+	db	75
+	db	32
+	db	68
+	db	69
+	db	182
+	db	0
+	db	25
+	db	15
+	db	191
+	db	0
+	db	0
+	db	47
+	db	70
+	db	80
+	db	128
+	db	3
+	db	10
+	db	18
+	db	81
+	db	200
+	db	3
+	db	31
+	db	70
+	db	160
+	db	3
+	db	2
+	db	24
+	db	70
+	db	232
+	db	3
+	db	80
+	db	35
+	db	36
+	db	37
+	db	38
+	db	82
+	zpage	r0
+	zpage	r1
+	zpage	r2
+	zpage	r3
+	zpage	r4
+	zpage	r5
+	zpage	r6
+	zpage	r7
+	zpage	r8
+	zpage	r9
+	zpage	r10
+	zpage	r11
+	zpage	r12
+	zpage	r13
+	zpage	r14
+	zpage	r15
+	zpage	r16
+	zpage	r17
+	zpage	r18
+	zpage	r19
+	zpage	r20
+	zpage	r21
+	zpage	r22
+	zpage	r23
+	zpage	r24
+	zpage	r25
+	zpage	r26
+	zpage	r27
+	zpage	r28
+	zpage	r29
+	zpage	r30
+	zpage	r31
+	zpage	btmp0
+	zpage	btmp1
+	zpage	btmp2
+	zpage	btmp3

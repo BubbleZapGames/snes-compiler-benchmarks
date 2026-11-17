@@ -1,0 +1,6 @@
+description = "0! to 15!, 20 times, summed in 32 bits: recursion and 32-bit multiplies (after c-bench-64's fact.c)."
+category = "c-bench-64"
+tags = ["u32", "multiply", "recursion", "c-bench-64"]
+
+[unsupported]
+r65-fs = "the FixedStack ABI rejects recursion"

@@ -1,0 +1,6 @@
+description = "Naive recursive Fibonacci: call and stack-frame overhead."
+category = "kernel"
+tags = ["recursion", "calls"]
+
+[unsupported]
+r65-fs = "the FixedStack ABI rejects recursion"

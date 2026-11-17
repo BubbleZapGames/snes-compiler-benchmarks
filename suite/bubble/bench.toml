@@ -1,0 +1,3 @@
+description = "Bubble sort 64 bytes, then fold them into a checksum."
+category = "kernel"
+tags = ["compare", "swap", "u8"]

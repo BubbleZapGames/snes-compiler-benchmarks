@@ -1,0 +1,47 @@
+// Sieve of Eratosthenes over the odd numbers with one bit per flag, through a
+// bit-mask table: the primes up to 16001. The algorithm of c-bench-64's
+// sieve_bit.c, smaller. Returns the prime count.
+const SIZE: u16 = 8000;
+
+#[lowram]
+static mut FLAGS: [u8; 1001];
+
+static BITV: [u8; 8] = [0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80];
+
+#[inline(never)]
+fn bench_init() {
+    asm!("NOP");
+}
+
+fn check_flag(idx: u16) -> u8 {
+    return FLAGS[idx >> 3] & BITV[idx & 7];
+}
+
+fn clear_flag(idx: u16) {
+    let b: u16 = idx >> 3;
+    FLAGS[b] = FLAGS[b] & ~BITV[idx & 7];
+}
+
+#[inline(never)]
+fn bench() -> u16 {
+    let mut count: u16 = 1;                     // 2 is prime
+    let mut i: u16 = 0;
+    while i < 1001 {
+        FLAGS[i] = 0xFF;
+        i = i + 1;
+    }
+    i = 0;
+    while i < SIZE {
+        if check_flag(i) != 0 {                 // flag i stands for 2i + 3
+            let prime: u16 = i + i + 3;
+            let mut k: u16 = i + prime;
+            while k < SIZE {
+                clear_flag(k);
+                k = k + prime;
+            }
+            count = count + 1;
+        }
+        i = i + 1;
+    }
+    return count;
+}

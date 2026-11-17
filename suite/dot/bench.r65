@@ -1,0 +1,28 @@
+// u8 x u8 dot product over 64 elements: the multiply routine.
+#[lowram]
+static mut VA: [u8; 64];
+#[lowram]
+static mut VB: [u8; 64];
+
+#[inline(never)]
+fn bench_init() {
+    let mut v: u16 = 1;
+    let mut i: u16 = 0;
+    while i < 64 {
+        v = (v << 2) + v + 0x3619;
+        VA[i] = (v >> 8) as u8;
+        VB[i] = v as u8;
+        i = i + 1;
+    }
+}
+
+#[inline(never)]
+fn bench() -> u16 {
+    let mut s: u16 = 0;
+    let mut i: u16 = 0;
+    while i < 64 {
+        s = s + mul8(VA[i], VB[i]);
+        i = i + 1;
+    }
+    return s;
+}

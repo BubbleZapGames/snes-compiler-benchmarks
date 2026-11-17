@@ -1,0 +1,57 @@
+// 16 frames of moving and bouncing 32 entities: an array of 9-byte structs.
+struct Entity {
+    x: u16,
+    y: u16,
+    vx: u16,
+    vy: u16,
+    alive: u8,
+}
+
+#[lowram]
+static mut ENTS: [Entity; 32];
+
+#[inline(never)]
+fn bench_init() {
+    let mut i: u16 = 0;
+    while i < 32 {
+        ENTS[i].x = (i << 3) - i;
+        ENTS[i].y = (i << 2) + i;
+        ENTS[i].vx = (i & 3) + 1;
+        ENTS[i].vy = (i & 1) + 2;
+        if i & 3 != 0 {
+            ENTS[i].alive = 1;
+        } else {
+            ENTS[i].alive = 0;
+        }
+        i = i + 1;
+    }
+}
+
+#[inline(never)]
+fn bench() -> u16 {
+    let mut s: u16 = 0;
+    let mut f: u16 = 0;
+    while f < 16 {
+        let mut i: u16 = 0;
+        while i < 32 {
+            if ENTS[i].alive != 0 {
+                ENTS[i].x = ENTS[i].x + ENTS[i].vx;
+                if ENTS[i].x > 240 {
+                    ENTS[i].vx = 0 - ENTS[i].vx;
+                }
+                ENTS[i].y = ENTS[i].y + ENTS[i].vy;
+                if ENTS[i].y > 200 {
+                    ENTS[i].vy = 0 - ENTS[i].vy;
+                }
+            }
+            i = i + 1;
+        }
+        f = f + 1;
+    }
+    let mut i: u16 = 0;
+    while i < 32 {
+        s = s + ENTS[i].x + ENTS[i].y;
+        i = i + 1;
+    }
+    return s;
+}

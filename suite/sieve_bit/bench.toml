@@ -1,0 +1,3 @@
+description = "Sieve of Eratosthenes with one bit per odd number, primes up to 16001: bit masks through a table (after c-bench-64's sieve_bit.c)."
+category = "c-bench-64"
+tags = ["bit-array", "u8", "calls", "c-bench-64"]

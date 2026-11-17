@@ -1,0 +1,38 @@
+// Bubble sort 64 bytes, then fold them into a checksum.
+#[lowram]
+static mut ARR: [u8; 64];
+
+#[inline(never)]
+fn bench_init() {
+    let mut v: u16 = 1;
+    let mut i: u8 = 0;
+    while i < 64 {
+        v = (v << 2) + v + 0x3619;
+        ARR[i] = (v >> 8) as u8;
+        i = i + 1;
+    }
+}
+
+#[inline(never)]
+fn bench() -> u16 {
+    let mut s: u16 = 0;
+    let mut i: u8 = 0;
+    while i < 63 {
+        let mut j: u8 = 0;
+        while j < 63 - i {
+            if ARR[j] > ARR[j + 1] {
+                let t: u8 = ARR[j];
+                ARR[j] = ARR[j + 1];
+                ARR[j + 1] = t;
+            }
+            j = j + 1;
+        }
+        i = i + 1;
+    }
+    i = 0;
+    while i < 64 {
+        s = (s << 1) ^ (ARR[i] as u16);
+        i = i + 1;
+    }
+    return s;
+}

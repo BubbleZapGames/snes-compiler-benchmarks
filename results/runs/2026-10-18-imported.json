@@ -1,0 +1,495 @@
+{
+ "schema": 1,
+ "run_id": "2026-10-18-imported",
+ "date": "2026-10-18T00:00:00Z",
+ "label": "imported from R65's c-compiler-bench branch (R65 v0.2.0); no listings",
+ "imported": true,
+ "harness_commit": null,
+ "emulator": {
+  "name": "Mesen-GDB",
+  "commit": null
+ },
+ "toolchains": {
+  "r65-fs": {
+   "compiler": "r65",
+   "display": "R65, FixedStack ABI",
+   "language": "r65",
+   "flags": [
+    "--cfg",
+    "snes",
+    "-O2",
+    "--abi",
+    "FixedStack"
+   ],
+   "version": "v0.2.0"
+  },
+  "r65": {
+   "compiler": "r65",
+   "display": "R65, Default ABI",
+   "language": "r65",
+   "flags": [
+    "--cfg",
+    "snes",
+    "-O2"
+   ],
+   "version": "v0.2.0"
+  },
+  "vbcc": {
+   "compiler": "vbcc",
+   "display": "vbcc65816 -O3 -speed",
+   "language": "c",
+   "flags": [
+    "+snes-los",
+    "-O3",
+    "-speed"
+   ],
+   "version": "r2"
+  },
+  "vbcc-nu": {
+   "compiler": "vbcc",
+   "display": "vbcc65816 -O3 -speed, no unroll",
+   "language": "c",
+   "flags": [
+    "+snes-los",
+    "-O3",
+    "-speed",
+    "-unroll-size=0"
+   ],
+   "version": "r2"
+  },
+  "tcc": {
+   "compiler": "tcc",
+   "display": "tcc-65816 + 816-opt (PVSnesLib)",
+   "language": "c",
+   "flags": [
+    "-Wall"
+   ],
+   "version": "master",
+   "commit": "e090f00"
+  },
+  "cc65": {
+   "compiler": "cc65",
+   "display": "cc65 -Oirs (6502 baseline)",
+   "language": "c",
+   "flags": [
+    "-Oirs",
+    "--cpu",
+    "65sc02"
+   ],
+   "version": "master",
+   "commit": "8d86ca7"
+  }
+ },
+ "benchmarks": {
+  "sum16": {
+   "expected": 15744
+  },
+  "sieve": {
+   "expected": 172
+  },
+  "bubble": {
+   "expected": 11242
+  },
+  "crc16": {
+   "expected": 20831
+  },
+  "copy": {
+   "expected": 72
+  },
+  "entities": {
+   "expected": 7994
+  },
+  "fib": {
+   "expected": 987
+  },
+  "popcount": {
+   "expected": 1021
+  },
+  "dot": {
+   "expected": 18923
+  },
+  "ptrsum": {
+   "expected": 63868
+  }
+ },
+ "cells": {
+  "sum16": {
+   "r65-fs": {
+    "status": "ok",
+    "cycles": 9787,
+    "size": 88,
+    "value": 15744
+   },
+   "r65": {
+    "status": "ok",
+    "cycles": 10299,
+    "size": 86,
+    "value": 15744
+   },
+   "vbcc": {
+    "status": "ok",
+    "cycles": 5324,
+    "size": 578,
+    "value": 15744
+   },
+   "vbcc-nu": {
+    "status": "ok",
+    "cycles": 8727,
+    "size": 62,
+    "value": 15744
+   },
+   "tcc": {
+    "status": "ok",
+    "cycles": 36702,
+    "size": 213,
+    "value": 15744
+   },
+   "cc65": {
+    "status": "ok",
+    "cycles": 45224,
+    "size": 283,
+    "value": 15744
+   }
+  },
+  "sieve": {
+   "r65-fs": {
+    "status": "ok",
+    "cycles": 170530,
+    "size": 112,
+    "value": 172
+   },
+   "r65": {
+    "status": "ok",
+    "cycles": 197550,
+    "size": 113,
+    "value": 172
+   },
+   "vbcc": {
+    "status": "ok",
+    "cycles": 146739,
+    "size": 224,
+    "value": 172
+   },
+   "vbcc-nu": {
+    "status": "ok",
+    "cycles": 166265,
+    "size": 110,
+    "value": 172
+   },
+   "tcc": {
+    "status": "ok",
+    "cycles": 525601,
+    "size": 288,
+    "value": 172
+   },
+   "cc65": {
+    "status": "ok",
+    "cycles": 435072,
+    "size": 275,
+    "value": 172
+   }
+  },
+  "bubble": {
+   "r65-fs": {
+    "status": "ok",
+    "cycles": 185604,
+    "size": 226,
+    "value": 11242
+   },
+   "r65": {
+    "status": "ok",
+    "cycles": 198522,
+    "size": 218,
+    "value": 11242
+   },
+   "vbcc": {
+    "status": "ok",
+    "cycles": 248100,
+    "size": 1198,
+    "value": 11242
+   },
+   "vbcc-nu": {
+    "status": "ok",
+    "cycles": 244371,
+    "size": 218,
+    "value": 11242
+   },
+   "tcc": {
+    "status": "ok",
+    "cycles": 759781,
+    "size": 676,
+    "value": 11242
+   },
+   "cc65": {
+    "status": "ok",
+    "cycles": 559397,
+    "size": 450,
+    "value": 11242
+   }
+  },
+  "crc16": {
+   "r65-fs": {
+    "status": "ok",
+    "cycles": 87598,
+    "size": 133,
+    "value": 20831
+   },
+   "r65": {
+    "status": "ok",
+    "cycles": 94764,
+    "size": 130,
+    "value": 20831
+   },
+   "vbcc": {
+    "status": "ok",
+    "cycles": 52721,
+    "size": 495,
+    "value": 20831
+   },
+   "vbcc-nu": {
+    "status": "ok",
+    "cycles": 90351,
+    "size": 111,
+    "value": 20831
+   },
+   "tcc": {
+    "status": "ok",
+    "cycles": 306602,
+    "size": 331,
+    "value": 20831
+   },
+   "cc65": {
+    "status": "ok",
+    "cycles": 275577,
+    "size": 359,
+    "value": 20831
+   }
+  },
+  "copy": {
+   "r65-fs": {
+    "status": "ok",
+    "cycles": 20619,
+    "size": 120,
+    "value": 72
+   },
+   "r65": {
+    "status": "ok",
+    "cycles": 20600,
+    "size": 112,
+    "value": 72
+   },
+   "vbcc": {
+    "status": "ok",
+    "cycles": 26495,
+    "size": 691,
+    "value": 72
+   },
+   "vbcc-nu": {
+    "status": "ok",
+    "cycles": 40002,
+    "size": 100,
+    "value": 72
+   },
+   "tcc": {
+    "status": "ok",
+    "cycles": 174219,
+    "size": 278,
+    "value": 72
+   },
+   "cc65": {
+    "status": "ok",
+    "cycles": 140410,
+    "size": 306,
+    "value": 72
+   }
+  },
+  "entities": {
+   "r65-fs": {
+    "status": "ok",
+    "cycles": 67758,
+    "size": 338,
+    "value": 7994
+   },
+   "r65": {
+    "status": "ok",
+    "cycles": 72118,
+    "size": 334,
+    "value": 7994
+   },
+   "vbcc": {
+    "status": "ok",
+    "cycles": 61172,
+    "size": 1238,
+    "value": 7994
+   },
+   "vbcc-nu": {
+    "status": "ok",
+    "cycles": 68102,
+    "size": 349,
+    "value": 7994
+   },
+   "tcc": {
+    "status": "ok",
+    "cycles": 668803,
+    "size": 1851,
+    "value": 7994
+   },
+   "cc65": {
+    "status": "ok",
+    "cycles": 401091,
+    "size": 1085,
+    "value": 7994
+   }
+  },
+  "fib": {
+   "r65-fs": {
+    "status": "unsupported",
+    "note": "the FixedStack ABI rejects recursion"
+   },
+   "r65": {
+    "status": "ok",
+    "cycles": 249047,
+    "size": 53,
+    "value": 987
+   },
+   "vbcc": {
+    "status": "ok",
+    "cycles": 224052,
+    "size": 131,
+    "value": 987
+   },
+   "vbcc-nu": {
+    "status": "ok",
+    "cycles": 224052,
+    "size": 131,
+    "value": 987
+   },
+   "tcc": {
+    "status": "ok",
+    "cycles": 395899,
+    "size": 94,
+    "value": 987
+   },
+   "cc65": {
+    "status": "ok",
+    "cycles": 577880,
+    "size": 148,
+    "value": 987
+   }
+  },
+  "popcount": {
+   "r65-fs": {
+    "status": "ok",
+    "cycles": 93687,
+    "size": 117,
+    "value": 1021
+   },
+   "r65": {
+    "status": "ok",
+    "cycles": 108622,
+    "size": 109,
+    "value": 1021
+   },
+   "vbcc": {
+    "status": "ok",
+    "cycles": 76826,
+    "size": 361,
+    "value": 1021
+   },
+   "vbcc-nu": {
+    "status": "ok",
+    "cycles": 76826,
+    "size": 96,
+    "value": 1021
+   },
+   "tcc": {
+    "status": "ok",
+    "cycles": 234808,
+    "size": 292,
+    "value": 1021
+   },
+   "cc65": {
+    "status": "ok",
+    "cycles": 175652,
+    "size": 296,
+    "value": 1021
+   }
+  },
+  "dot": {
+   "r65-fs": {
+    "status": "ok",
+    "cycles": 5835,
+    "size": 119,
+    "value": 18923
+   },
+   "r65": {
+    "status": "ok",
+    "cycles": 5959,
+    "size": 116,
+    "value": 18923
+   },
+   "vbcc": {
+    "status": "ok",
+    "cycles": 10558,
+    "size": 909,
+    "value": 18923
+   },
+   "vbcc-nu": {
+    "status": "ok",
+    "cycles": 11486,
+    "size": 190,
+    "value": 18923
+   },
+   "tcc": {
+    "status": "ok",
+    "cycles": 27397,
+    "size": 1064,
+    "value": 18923
+   },
+   "cc65": {
+    "status": "ok",
+    "cycles": 31174,
+    "size": 416,
+    "value": 18923
+   }
+  },
+  "ptrsum": {
+   "r65-fs": {
+    "status": "ok",
+    "cycles": 22110,
+    "size": 102,
+    "value": 63868
+   },
+   "r65": {
+    "status": "ok",
+    "cycles": 24646,
+    "size": 94,
+    "value": 63868
+   },
+   "vbcc": {
+    "status": "ok",
+    "cycles": 11256,
+    "size": 778,
+    "value": 63868
+   },
+   "vbcc-nu": {
+    "status": "ok",
+    "cycles": 17943,
+    "size": 106,
+    "value": 63868
+   },
+   "tcc": {
+    "status": "ok",
+    "cycles": 83602,
+    "size": 250,
+    "value": 63868
+   },
+   "cc65": {
+    "status": "ok",
+    "cycles": 95530,
+    "size": 296,
+    "value": 63868
+   }
+  }
+ }
+}

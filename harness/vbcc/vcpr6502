@@ -1,0 +1,7 @@
+#!/bin/sh
+# vc runs the vcpr6502 code compressor at -O3, but vbcc65816 r2 does not ship
+# it. The backend only compresses under -size, so for -speed builds it is a
+# pass-through: copy the assembly unchanged.
+# usage: vcpr6502 [-quiet] <in> <out>
+[ "$1" = "-quiet" ] && shift
+cp "$1" "$2"

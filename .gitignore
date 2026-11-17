@@ -1,0 +1,7 @@
+build/
+.toolchains/
+_site/
+__pycache__/
+*.pyc
+local.toml
+.pytest_cache/

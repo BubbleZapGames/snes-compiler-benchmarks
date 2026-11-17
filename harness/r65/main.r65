@@ -1,0 +1,33 @@
+// R65 driver: the same shape as harness/c/main.c. bench() is #[inline(never)]
+// in bench.r65, standing in for the separate translation unit the C side uses.
+
+#[snesrom(name="R65 BENCH")]
+#[stack(0x0100, 0x01FF)]
+
+include!("lib/65816.r65")
+include!("lib/sneslib.r65")
+include!("lib/math.r65")
+
+#[bank(0)]
+
+include!("bench.r65")
+
+#[ram]
+static mut RESULT: u16;
+
+#[inline(never)]
+fn done() {
+    asm!("NOP");
+}
+
+#[entry]
+fn reset() -> ! {
+    NMITIMEN = 0;
+    bench_init();
+    RESULT = bench();
+    done();
+    loop {}
+}
+
+#[interrupt(nmi)]
+fn nmi_handler() {}

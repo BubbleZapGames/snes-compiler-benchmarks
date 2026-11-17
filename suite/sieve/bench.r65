@@ -1,0 +1,31 @@
+// Sieve of Eratosthenes over 1024 byte flags; returns the prime count.
+#[lowram]
+static mut FLAGS: [u8; 1024];
+
+#[inline(never)]
+fn bench_init() {
+    asm!("NOP");
+}
+
+#[inline(never)]
+fn bench() -> u16 {
+    let mut count: u16 = 0;
+    let mut i: u16 = 0;
+    while i < 1024 {
+        FLAGS[i] = 0;
+        i = i + 1;
+    }
+    i = 2;
+    while i < 1024 {
+        if FLAGS[i] == 0 {
+            count = count + 1;
+            let mut j: u16 = i + i;
+            while j < 1024 {
+                FLAGS[j] = 1;
+                j = j + i;
+            }
+        }
+        i = i + 1;
+    }
+    return count;
+}

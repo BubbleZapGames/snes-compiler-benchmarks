@@ -1,0 +1,59 @@
+// The factorials 0! to 15!, 20 times over, summed in 32 bits (wrapping): a
+// recursive function and 32-bit multiplies, through stdlib U32. The algorithm
+// of c-bench-64's fact.c, fewer iterations. Returns the 32-bit sum folded to
+// 16 bits.
+include!("lib/U32.r65")
+
+#[lowram]
+static mut ARRAY: [U32; 16];
+#[lowram]
+static mut F: U32;
+#[lowram]
+static mut RES: U32;
+// Set at run time, so no compiler can work the result out at compile time.
+#[lowram]
+static mut N_ITER: u16;
+#[lowram]
+static mut SIZE: u16;
+
+#[inline(never)]
+fn bench_init() {
+    N_ITER = 20;
+    SIZE = 16;
+}
+
+// r = i!, recursively, as the C does it (aggregates go by reference in R65)
+fn fact(i: u16, r: far *U32) {
+    if i > 1 {
+        fact(i - 1, r);
+        r.mul_u16(i);
+    } else {
+        r.from_u16(1);
+    }
+}
+
+#[inline(never)]
+fn bench() -> u16 {
+    let mut j: u16 = 0;
+    while j < SIZE {
+        ARRAY[j].from_u16(0);
+        j = j + 1;
+    }
+    let mut i: u16 = 0;
+    while i < N_ITER {
+        j = 0;
+        while j < SIZE {
+            fact(j, &F as far *U32);
+            ARRAY[j] += F;
+            j = j + 1;
+        }
+        i = i + 1;
+    }
+    RES.from_u16(0);
+    j = 0;
+    while j < SIZE {
+        RES += ARRAY[j];
+        j = j + 1;
+    }
+    return RES.hi ^ RES.lo;
+}

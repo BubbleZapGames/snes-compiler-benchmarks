@@ -1,0 +1,54 @@
+// 56 digits of pi from the Rabinowitz-Wagon spigot over 196 terms: 32-bit
+// multiplies, divides and remainders by 16-bit values, through stdlib U32.
+// The algorithm of c-bench-64's pi.c, smaller. Returns the sum of the
+// 4-digit groups.
+include!("lib/U32.r65")
+
+const TERMS: u16 = 196;
+
+#[lowram]
+static mut ARR: [u16; 197];
+#[lowram]
+static mut SUM: U32;
+#[lowram]
+static mut T: U32;
+
+#[inline(never)]
+fn bench_init() {
+    asm!("NOP");
+}
+
+#[inline(never)]
+fn bench() -> u16 {
+    let mut carry: u16 = 0;
+    let mut s: u16 = 0;
+    let mut i: u16 = 0;
+    while i <= TERMS {
+        ARR[i] = 2000;
+        i = i + 1;
+    }
+    i = TERMS;
+    while i > 0 {
+        SUM.from_u16(0);
+        let mut j: u16 = i;
+        while j > 0 {
+            let d: u16 = j + j - 1;
+            T.from_u16(ARR[j]);
+            T.mul_u16(10000);
+            SUM.mul_u16(j);
+            SUM += T;                           // sum = sum * j + 10000 * arr[j]
+            T.copy(&SUM as far *U32);
+            T.mod_u16(d);
+            ARR[j] = T.lo;                      // arr[j] = sum % d
+            SUM.div_u16(d);                     // sum /= d
+            j = j - 1;
+        }
+        T.copy(&SUM as far *U32);
+        T.div_u16(10000);
+        s = s + carry + T.lo;                   // the next four digits
+        SUM.mod_u16(10000);
+        carry = SUM.lo;
+        i = i - 14;
+    }
+    return s;
+}

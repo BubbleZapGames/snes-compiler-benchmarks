@@ -1,0 +1,3 @@
+description = "Sieve of Eratosthenes over 1024 byte flags; returns the prime count."
+category = "kernel"
+tags = ["loop", "nested-loop", "byte-store"]

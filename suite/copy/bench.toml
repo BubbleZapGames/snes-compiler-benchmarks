@@ -1,0 +1,3 @@
+description = "Byte-at-a-time copy of 1024 bytes."
+category = "kernel"
+tags = ["loop", "memcpy", "u8"]

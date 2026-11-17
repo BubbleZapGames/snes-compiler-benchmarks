@@ -1,0 +1,133 @@
+# Every toolchain the suite measures: a compiler plus a fixed flag set.
+#
+#   compiler         adapter module in toolchains/<compiler>.py
+#   language         which source it builds: c, r65 or asm
+#   version          the pin `scb setup` fetches
+#   flags            passed to the compiler as listed
+#   redistributable  false = CI cannot fetch it; results come from local runs
+#   kind             65816 (default), 6502 (a 6502-family baseline) or reference
+#
+# The remaining keys are adapter options or text for the site
+# (url, license, placement, notes).
+
+[r65-fs]
+display = "R65, FixedStack ABI"
+compiler = "r65"
+language = "r65"
+version = "v0.4.0"
+flags = ["--cfg", "snes", "-O2", "--abi", "FixedStack"]
+scratch_regs = true
+url = "https://github.com/BubbleZapGames/R65"
+license = "MIT"
+placement = "statics are #[lowram] (bank $00, 16-bit addresses); locals in the scratch_regs.r65 direct-page pool"
+notes = ["FixedStack rejects recursion, so fib is unsupported.",
+         "Built with stdlib/scratch_regs.r65 as the direct-page scratch pool."]
+
+[r65]
+display = "R65, Default ABI"
+compiler = "r65"
+language = "r65"
+version = "v0.4.0"
+flags = ["--cfg", "snes", "-O2"]
+url = "https://github.com/BubbleZapGames/R65"
+license = "MIT"
+placement = "statics are #[lowram] (bank $00, 16-bit addresses); locals on the stack"
+
+[vbcc]
+display = "vbcc65816 -O3 -speed"
+compiler = "vbcc"
+language = "c"
+version = "r2"
+flags = ["+snes-los", "-O3", "-speed"]
+url = "http://www.compilers.de/vbcc.html"
+license = "vbcc license: free for non-commercial use"
+placement = "tiny model: near data in low RAM, 16-bit addresses"
+notes = ["At -O3, vc runs the vcpr6502 code compressor, which r2 does not ship. harness/vbcc/vcpr6502 passes the code through unchanged. The backend only compresses under -size."]
+
+[vbcc-nu]
+display = "vbcc65816 -O3 -speed, no unroll"
+compiler = "vbcc"
+language = "c"
+version = "r2"
+flags = ["+snes-los", "-O3", "-speed", "-unroll-size=0"]
+url = "http://www.compilers.de/vbcc.html"
+license = "vbcc license: free for non-commercial use"
+placement = "tiny model: near data in low RAM, 16-bit addresses"
+notes = ["As vbcc, with loop unrolling off: closer to the code size of the other entrants."]
+
+[calypsi]
+display = "Calypsi 65816 -O2 --speed"
+compiler = "calypsi"
+language = "c"
+version = "5.18"
+flags = ["--target", "SNES", "-O2", "--speed", "--code-model", "small", "--data-model", "small"]
+url = "https://www.calypsi.cc/"
+license = "closed source, free for hobby use"
+placement = "small data model: data in bank $00"
+
+[wdc]
+display = "WDC816CC 3.49"
+compiler = "wdc"
+language = "c"
+version = "3.49"
+flags = ["-MS", "-SOP", "-DSIZEOF_INT=2", "-DSIZEOF_SHORT=2", "-DSIZEOF_LONG=4"]
+library = "CS"
+redistributable = false
+url = "https://wdc65xx.com/WDCTools"
+license = "WDCTools license (Windows freeware; not for commercial products on non-WDC cores)"
+placement = "small memory model: code and data in bank $00, globals in low RAM"
+notes = ["Windows tools, run under Wine. Measured locally.",
+         "The SIZEOF_* defines are what WDC's stdint.h needs to define uint32_t.",
+         "fact crashes: after the recursive call WDC816CC calls its 32-bit multiply helper without pushing the other operand.",
+         "fib is wrong at every optimisation level: after the second recursive call WDC816CC adds the result from its scratch register R0, which nothing stored, instead of from A, where the manual says results return."]
+
+[llvm-mos]
+kind = "6502"
+display = "llvm-mos -O3"
+compiler = "llvm_mos"
+language = "c"
+version = "v23.4.0"
+flags = ["-mcpu=mosw65816", "-O3"]
+url = "https://github.com/llvm-mos/llvm-mos"
+license = "Apache 2.0 with LLVM exceptions"
+placement = "zero page for its imaginary registers, statics in low RAM, soft stack below $1F00"
+notes = ["llvm-mos emits 6502-family code: its w65816 CPU adds instructions, not the 16-bit modes. It runs in emulation mode with 8-bit registers, like cc65, so it is a 6502 baseline, not a 65816 compiler.",
+         "-O3 was the fastest of -O2, -O3 and -Os on this suite, by about 1%.",
+         "The SDK builds with LTO by default. bench.c is compiled with LTO and the driver without, so bench() stays a call from a separate unit, as on every other toolchain."]
+
+[tcc]
+display = "tcc-65816 + 816-opt (PVSnesLib)"
+compiler = "tcc"
+language = "c"
+version = "4.7.1"
+flags = ["-Wall"]
+url = "https://github.com/alekmaul/pvsneslib"
+license = "MIT (PVSnesLib); LGPL (tcc)"
+placement = "globals in bank $7E, with DBR = $7E"
+notes = ["816-tcc output is run through 816-opt, as PVSnesLib's snes_rules does.",
+         "long is 16 bits in tcc-65816 (C requires at least 32); the 32-bit benchmarks use uint32_t, which its stdint.h maps to long long.",
+         "PVSnesLib links libtcc whole, so tcc's runtime helpers are in its stub and not counted in size."]
+
+[cc65]
+kind = "6502"
+display = "cc65 -Oirs"
+compiler = "cc65"
+language = "c"
+version = "master"
+flags = ["-Oirs", "--cpu", "65sc02"]
+cpu = "65sc02"
+url = "https://cc65.github.io/"
+license = "zlib"
+placement = "zero page and low RAM, 16-bit addresses"
+notes = ["cc65 targets the 6502, not the 65816. Its code runs in emulation mode with 8-bit registers: a baseline, not a 65816 compiler."]
+
+[asm]
+kind = "reference"
+display = "Hand-written assembly"
+compiler = "asm"
+language = "asm"
+flags = []
+reference = true   # joins the leaderboard once it covers every benchmark
+license = "MIT"
+placement = "chosen per benchmark by the author, like any assembly programmer would"
+notes = ["The reference a careful assembly programmer would write. WLA-DX."]

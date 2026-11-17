@@ -1,0 +1,26 @@
+// Byte-at-a-time copy of 1024 bytes.
+#[lowram]
+static mut SRC: [u8; 1024];
+#[lowram]
+static mut DST: [u8; 1024];
+
+#[inline(never)]
+fn bench_init() {
+    let mut v: u16 = 1;
+    let mut i: u16 = 0;
+    while i < 1024 {
+        v = (v << 2) + v + 0x3619;
+        SRC[i] = (v >> 8) as u8;
+        i = i + 1;
+    }
+}
+
+#[inline(never)]
+fn bench() -> u16 {
+    let mut i: u16 = 0;
+    while i < 1024 {
+        DST[i] = SRC[i];
+        i = i + 1;
+    }
+    return (DST[0] as u16) + (DST[511] as u16) + (DST[1023] as u16);
+}

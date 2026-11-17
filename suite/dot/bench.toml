@@ -1,0 +1,3 @@
+description = "u8 x u8 dot product over 64 elements: the multiply routine."
+category = "kernel"
+tags = ["multiply", "u8"]

@@ -1,0 +1,29 @@
+// Sum 512 bytes through a pointer argument.
+#[lowram]
+static mut BUF: [u8; 512];
+
+#[inline(never)]
+fn bench_init() {
+    let mut v: u16 = 1;
+    let mut i: u16 = 0;
+    while i < 512 {
+        v = (v << 2) + v + 0x3619;
+        BUF[i] = (v >> 8) as u8;
+        i = i + 1;
+    }
+}
+
+fn sum_bytes(p: *u8, n: u16) -> u16 {
+    let mut s: u16 = 0;
+    let mut i: u16 = 0;
+    while i < n {
+        s = s + (p[i] as u16);
+        i = i + 1;
+    }
+    return s;
+}
+
+#[inline(never)]
+fn bench() -> u16 {
+    return sum_bytes(&BUF as *u8, 512);
+}

@@ -1,0 +1,29 @@
+// Count the set bits in 256 bytes, one shift at a time.
+#[lowram]
+static mut BUF: [u8; 256];
+
+#[inline(never)]
+fn bench_init() {
+    let mut v: u16 = 1;
+    let mut i: u16 = 0;
+    while i < 256 {
+        v = (v << 2) + v + 0x3619;
+        BUF[i] = (v >> 8) as u8;
+        i = i + 1;
+    }
+}
+
+#[inline(never)]
+fn bench() -> u16 {
+    let mut c: u16 = 0;
+    let mut i: u16 = 0;
+    while i < 256 {
+        let mut v: u8 = BUF[i];
+        while v != 0 {
+            c = c + ((v & 1) as u16);
+            v = v >> 1;
+        }
+        i = i + 1;
+    }
+    return c;
+}

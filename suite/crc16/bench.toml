@@ -1,0 +1,3 @@
+description = "Bitwise CRC-16/CCITT-FALSE over 256 bytes."
+category = "kernel"
+tags = ["shift", "xor", "branch"]

@@ -1,0 +1,25 @@
+// Sum a 256-entry u16 array.
+#[lowram]
+static mut DATA: [u16; 256];
+
+#[inline(never)]
+fn bench_init() {
+    let mut v: u16 = 1;
+    let mut i: u16 = 0;
+    while i < 256 {
+        v = (v << 2) + v + 0x3619;
+        DATA[i] = v;
+        i = i + 1;
+    }
+}
+
+#[inline(never)]
+fn bench() -> u16 {
+    let mut s: u16 = 0;
+    let mut i: u16 = 0;
+    while i < 256 {
+        s = s + DATA[i];
+        i = i + 1;
+    }
+    return s;
+}

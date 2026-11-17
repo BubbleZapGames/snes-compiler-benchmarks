@@ -1,0 +1,4 @@
+description = "LZ4 block decode of a 375-byte ROM block into 1024 bytes, then a byte sum of the output."
+category = "workload"
+tags = ["decompression", "byte-stream", "overlapping-copy", "branch"]
+notes = "Code size includes the 375-byte compressed block, the same for every toolchain."

@@ -1,0 +1,17 @@
+// Naive recursive Fibonacci: call and stack-frame overhead.
+#[inline(never)]
+fn bench_init() {
+    asm!("NOP");
+}
+
+fn fib(n: u16) -> u16 {
+    if n < 2 {
+        return n;
+    }
+    return fib(n - 1) + fib(n - 2);
+}
+
+#[inline(never)]
+fn bench() -> u16 {
+    return fib(16);
+}

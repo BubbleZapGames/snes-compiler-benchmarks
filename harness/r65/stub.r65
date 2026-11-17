@@ -1,0 +1,10 @@
+// Empty benchmark: the size baseline.
+#[inline(never)]
+fn bench_init() {
+    asm!("NOP");
+}
+
+#[inline(never)]
+fn bench() -> u16 {
+    return 0;
+}

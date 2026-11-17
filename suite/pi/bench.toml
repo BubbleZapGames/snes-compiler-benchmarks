@@ -1,0 +1,3 @@
+description = "56 digits of pi by the Rabinowitz-Wagon spigot: 32-bit multiply, divide and remainder (after c-bench-64's pi.c)."
+category = "c-bench-64"
+tags = ["u32", "multiply", "divide", "c-bench-64"]
