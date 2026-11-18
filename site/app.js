@@ -86,7 +86,10 @@
   }
 
   function visible() {
-    return data.toolchains.filter(function (t) { return !state.lang || data.languages[t] === state.lang; });
+    // the hand-written reference stays in every language view as the yardstick
+    return data.toolchains.filter(function (t) {
+      return !state.lang || data.languages[t] === state.lang || data.kinds[t] === "reference";
+    });
   }
 
   function denominators(values, shown, base) {
@@ -162,7 +165,7 @@
       var board = document.querySelector('.board[data-metric="' + metric + '"]');
       board.querySelector("ol.bars").innerHTML = html;
       var notes = [];
-      if (state.lang) notes.push("C compilers only; ratios are against the best C result.");
+      if (state.lang) notes.push("C compilers and the hand-written assembly; ratios are against the best of them.");
       if (state.base) {
         notes.push("Divided by " + data.labels[state.base] + ", over the " + covered + " of " +
                    data.benches.length + " benchmarks it passed. Below 1.00× is faster than it.");

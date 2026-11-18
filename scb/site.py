@@ -257,7 +257,7 @@ def index_page(rec, tcs, benches):
                    if results.value(rec, b, refs[0], "cycles") == results.best_in_row(rec, b, "cycles", shown))
         ref_note = (f'<p class="ref-note">The hand-written assembly is the best on {wins} of {len(benches)} benchmarks '
                     f'for cycles, so a compiler\'s cycles ratio reads as how many times slower its code is than '
-                    f'code written by hand. Choose C above to compare the C compilers only.</p>')
+                    f'code written by hand. Choose C above to compare the C compilers against it.</p>')
     tables = "".join(heat_table(rec, tcs, benches, shown, m, f"{t}: each cell over the best in its row")
                      for m, t, _ in METRICS)
     body = f"""
