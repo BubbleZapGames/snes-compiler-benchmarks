@@ -1,7 +1,7 @@
 ###############################################################################
 #                                                                             #
 # Calypsi ISO C compiler for 65816                               version 5.18 #
-#                                                       17/Nov/2026  01:56:20 #
+#                                                       18/Nov/2026  08:25:52 #
 # Command line: --target SNES -O2 --speed --code-model small --data-model     #
 #               small bench.c -o bench.o --list-file bench.lst                #
 #                                                                             #
@@ -15,7 +15,6 @@
     \ 000000                      .rtmodel target,"snes"
     \ 000000                      .rtmodel ppu,"1"
     \ 000000                      .extern _Dp
-    \ 000000                      .extern _FillDP4
     \ 000000                      .extern _Mul32
     \ 000000                      .extern _Vfp
 0001                  /* The factorials 0! to 15!, 20 times over, summed in 32 bits (wrapping): a
@@ -58,34 +57,37 @@
 0021                  {
     \ 000000                      .section code,text
     \ 000000                      .public fact
-    \ 000000          fact:
-0022                      if (i > 1)
-    \ 000000 a20100               ldx     ##1
-    \ 000003 85..                 sta     dp:.tiny _Dp
-    \ 000005 e4..                 cpx     dp:.tiny _Dp
-    \ 000007 b019                 bcs     `?L8`
-0023                          return i * fact(i - 1);
-    \ 000009 85..                 sta     dp:.tiny _Dp
-    \ 00000b 64..                 stz     dp:.tiny (_Dp+2)
-    \ 00000d d4..                 pei     dp:.tiny (_Dp+2)
-    \ 00000f d4..                 pei     dp:.tiny _Dp
-    \ 000011 3a                   dec     a
-    \ 000012 20....               jsr     fact
-    \ 000015 86..                 stx     dp:.tiny (_Dp+6)
-    \ 000017 85..                 sta     dp:.tiny (_Dp+4)
-    \ 000019 22......             jsl     long:_FillDP4
-    \ 00001d ..                   .byte   .tiny _Dp
-    \ 00001e 20....               jsr     _Mul32
-    \ 000021 60                   rts
-    \ 000022          `?L8`:
-0024                      return 1;
-    \ 000022 8a                   txa
-    \ 000023 ca                   dex
-    \ 000024 60                   rts
-0025                  }
-0026
-0027                  unsigned int bench(void)
-0028                  {
+    \ 000000 5a       fact:       phy
+    \ 000001 8301                 sta     1,s
+0022                      uint32_t r;
+0023
+0024                      if (i > 1) {
+    \ 000003 a90100               lda     ##1
+    \ 000006 c301                 cmp     1,s
+    \ 000008 b015                 bcs     `?L8`
+0025                          r = fact(i - 1);
+    \ 00000a a301                 lda     1,s
+    \ 00000c 3a                   dec     a
+    \ 00000d 20....               jsr     fact
+    \ 000010 86..                 stx     dp:.tiny (_Dp+6)
+    \ 000012 85..                 sta     dp:.tiny (_Dp+4)
+0026                          return i * r;
+    \ 000014 a301                 lda     1,s
+    \ 000016 85..                 sta     dp:.tiny _Dp
+    \ 000018 64..                 stz     dp:.tiny (_Dp+2)
+    \ 00001a 20....               jsr     _Mul32
+    \ 00001d 8003                 bra     `?L6`
+    \ 00001f          `?L8`:
+0027                      }
+0028                      return 1;
+    \ 00001f a20000               ldx     ##0
+    \ 000022          `?L6`:
+0029                  }
+    \ 000022 7a                   ply
+    \ 000023 60                   rts
+0030
+0031                  unsigned int bench(void)
+0032                  {
     \ 000000                      .section code,text
     \ 000000                      .public bench
     \ 000000          bench:
@@ -93,36 +95,36 @@
     \ 000002 d4..                 pei     dp:.tiny (_Dp+10)
     \ 000004 5a                   phy
     \ 000005 5a                   phy
-0029                      unsigned int i, j;
-0030                      uint32_t res = 0;
+0033                      unsigned int i, j;
+0034                      uint32_t res = 0;
     \ 000006 64..                 stz     dp:.tiny (_Dp+8)
     \ 000008 64..                 stz     dp:.tiny (_Dp+10)
-0031
-0032                      for (j = 0; j < size; j++)
+0035
+0036                      for (j = 0; j < size; j++)
     \ 00000a a00000               ldy     ##0
     \ 00000d          `?L16`:
     \ 00000d cc....               cpy     size
     \ 000010 9077                 bcc     `?L15`
-0033                          array[j] = 0;
-0034                      for (i = 0; i < n_iter; i++)
+0037                          array[j] = 0;
+0038                      for (i = 0; i < n_iter; i++)
     \ 000012 a90000               lda     ##0
     \ 000015 8303     `?L35`:     sta     3,s
     \ 000017 a303                 lda     3,s
     \ 000019 cd....               cmp     n_iter
     \ 00001c 9032                 bcc     `?L19`
-0035                          for (j = 0; j < size; j++)
-0036                              array[j] += fact(j);
-0037                      for (j = 0; j < size; j++)
+0039                          for (j = 0; j < size; j++)
+0040                              array[j] += fact(j);
+0041                      for (j = 0; j < size; j++)
     \ 00001e a90000               lda     ##0
     \ 000021 8301                 sta     1,s
     \ 000023 a301     `?L28`:     lda     1,s
     \ 000025 cd....               cmp     size
     \ 000028 900d                 bcc     `?L27`
-0038                          res += array[j];
-0039                      return (unsigned int)(res >> 16) ^ (unsigned int)res;
+0042                          res += array[j];
+0043                      return (unsigned int)(res >> 16) ^ (unsigned int)res;
     \ 00002a a5..                 lda     dp:.tiny (_Dp+8)
     \ 00002c 45..                 eor     dp:.tiny (_Dp+10)
-0040                  }
+0044                  }
     \ 00002e 7a                   ply
     \ 00002f 7a                   ply
     \ 000030 7a                   ply
@@ -189,5 +191,5 @@
 #                        #
 ##########################
 
-Executable        (Text): 204 bytes
+Executable        (Text): 203 bytes
 Zero initialized   (BSS):  68 bytes

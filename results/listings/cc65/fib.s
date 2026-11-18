@@ -39,29 +39,34 @@
 .segment	"CODE"
 
 	jsr     pushax
-	ldy     #$01
+	jsr     decsp4
+	ldy     #$05
 	lda     (c_sp),y
 	cmp     #$00
 	bne     L0003
-	lda     (c_sp)
+	dey
+	lda     (c_sp),y
 	cmp     #$02
 L0003:	bcs     L0002
-	ldy     #$01
+	ldy     #$05
 	lda     (c_sp),y
 	tax
-	lda     (c_sp)
-	jmp     incsp2
-L0002:	ldy     #$01
+	dey
+	lda     (c_sp),y
+	jmp     incsp6
+L0002:	ldy     #$05
 	lda     (c_sp),y
 	tax
-	lda     (c_sp)
+	dey
+	lda     (c_sp),y
 	sec
 	sbc     #$01
 	bcs     L0004
 	dex
 L0004:	jsr     _fib
-	jsr     pushax
-	ldy     #$03
+	ldy     #$02
+	jsr     staxysp
+	ldy     #$05
 	lda     (c_sp),y
 	tax
 	dey
@@ -71,8 +76,19 @@ L0004:	jsr     _fib
 	bcs     L0005
 	dex
 L0005:	jsr     _fib
-	jsr     tosaddax
-	jmp     incsp2
+	jsr     stax0sp
+	ldy     #$02
+	lda     (c_sp),y
+	clc
+	adc     (c_sp)
+	pha
+	iny
+	lda     (c_sp),y
+	ldy     #$01
+	adc     (c_sp),y
+	tax
+	pla
+	jmp     incsp6
 
 .endproc
 

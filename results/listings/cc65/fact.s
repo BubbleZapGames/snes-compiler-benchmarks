@@ -57,16 +57,17 @@ _size:
 .segment	"CODE"
 
 	jsr     pushax
-	ldy     #$01
+	jsr     decsp4
+	ldy     #$05
 	lda     (c_sp),y
 	tax
-	lda     (c_sp)
+	dey
+	lda     (c_sp),y
 	cmp     #$02
 	txa
 	sbc     #$00
 	bcc     L0004
-	jsr     pushw0sp
-	ldy     #$03
+	iny
 	lda     (c_sp),y
 	tax
 	dey
@@ -76,14 +77,19 @@ _size:
 	bcs     L0003
 	dex
 L0003:	jsr     _fact
+	jsr     steax0sp
+	ldy     #$07
+	jsr     pushwysp
+	ldy     #$05
+	jsr     ldeaxysp
 	jsr     tosulong
 	jsr     tosumuleax
-	jmp     incsp2
+	jmp     incsp6
 L0004:	stz     sreg+1
 	stz     sreg
-	tya
+	lda     #$01
 	ldx     #$00
-	jmp     incsp2
+	jmp     incsp6
 
 .endproc
 

@@ -2,6 +2,7 @@
 .accu 16
 .index 16
 .16bit
+.define __fact_locals 8
 .define __bench_locals 28
 
 .SECTION ".bench_inittext_0x0" SUPERFREE
@@ -19,7 +20,13 @@ rtl
 
 .define __fact_ret 3
 fact:
-lda 3 + 1,s
+.ifgr __fact_locals 0
+tsa
+sec
+sbc #__fact_locals
+tas
+.endif
+lda 3 + __fact_locals + 1,s
 cmp.w #1
 beq ++
 bcs +
@@ -31,40 +38,65 @@ dec.b tcc__r0
 pei (tcc__r0)
 jsr.l fact
 pla
-lda 3 + 1,s
+lda.b tcc__r0
+sta -4 + __fact_locals + 1,s
+stz.b tcc__r2h
+tsa
+clc
+adc #(-4 + __fact_locals + 1) + 2
 sta.b tcc__r2
-stz.b tcc__r3
+lda.b tcc__r1
+sta.b [tcc__r2]
+lda 3 + __fact_locals + 1,s
+stz.b tcc__r1
+sta -6 + __fact_locals + 1,s
+lda.b tcc__r1
+sta -8 + __fact_locals + 1,s
+lda -4 + __fact_locals + 1,s
+sta.b tcc__r2
+stz.b tcc__r0h
+tsa
+clc
+adc #(-4 + __fact_locals + 1) + 2
+sta.b tcc__r0
+lda.b [tcc__r0]
+sta.b tcc__r1
+lda -6 + __fact_locals + 1,s
 sta.b tcc__r9
 stz.b tcc__r9h
-lda.b tcc__r0
+lda.b tcc__r2
 sta.b tcc__r10
 stz.b tcc__r10h
 jsr.l tcc__mull
-stx.b tcc__r4
-sty.b tcc__r5
+stx.b tcc__r3
+sty.b tcc__r4
+lda -6 + __fact_locals + 1,s
+sta.b tcc__r0
 lda.b tcc__r1
 sta.b tcc__r9
-lda.b tcc__r2
-sta.b tcc__r10
-jsr.l tcc__mul
-sta.b tcc__r2
 lda.b tcc__r0
+sta.b tcc__r10
+jsr.l tcc__mul
+sta.b tcc__r0
+lda -8 + __fact_locals + 1,s
+sta.b tcc__r1
+lda.b tcc__r2
 sta.b tcc__r9
-lda.b tcc__r3
+lda.b tcc__r1
 sta.b tcc__r10
 jsr.l tcc__mul
 clc
-adc.b tcc__r2
+adc.b tcc__r0
 clc
-adc.b tcc__r4
-sta.b tcc__r4
-lda.b tcc__r5
-sta.b tcc__r0
-lda.b tcc__r5h
-sta.b tcc__r0h
+adc.b tcc__r3
+sta.b tcc__r3
 lda.b tcc__r4
-sta.b tcc__r1
+sta.b tcc__r0
 lda.b tcc__r4h
+sta.b tcc__r0h
+lda.b tcc__r3
+sta.b tcc__r1
+lda.b tcc__r3h
 sta.b tcc__r1h
 bra __local_1
 __local_0:
@@ -74,6 +106,12 @@ lda.w #0
 sta.b tcc__r1
 __local_1:
 __local_2:
+.ifgr __fact_locals 0
+tsa
+clc
+adc #__fact_locals
+tas
+.endif
 rtl
 .ENDS
 

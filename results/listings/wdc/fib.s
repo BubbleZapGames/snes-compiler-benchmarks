@@ -27,6 +27,8 @@ __fib:
 	phd
 	tcd
 n_0	set	3
+a_1	set	0
+b_1	set	2
 	lda	<L5+n_0
 	cmp	#<$2
 	bcs	L10001
@@ -43,22 +45,23 @@ L8:
 	tya
 	rts
 L10001:
-	lda	#$fffe
-	clc
-	adc	<L5+n_0
-	pha
-	jsr	__fib
 	lda	#$ffff
 	clc
 	adc	<L5+n_0
 	pha
 	jsr	__fib
-	lda	<R1
+	sta	<L6+a_1
+	lda	#$fffe
 	clc
-	adc	<R0
+	adc	<L5+n_0
+	pha
+	jsr	__fib
+	sta	<L6+b_1
+	clc
+	adc	<L6+a_1
 	bra	L8
-L5	equ	8
-L6	equ	9
+L5	equ	4
+L6	equ	1
 	ends
 	efunc
 	code

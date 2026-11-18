@@ -1,7 +1,7 @@
 ###############################################################################
 #                                                                             #
 # Calypsi ISO C compiler for 65816                               version 5.18 #
-#                                                       17/Nov/2026  01:56:15 #
+#                                                       18/Nov/2026  08:25:52 #
 # Command line: --target SNES -O2 --speed --code-model small --data-model     #
 #               small bench.c -o bench.o --list-file bench.lst                #
 #                                                                             #
@@ -29,41 +29,44 @@
 0007                  {
     \ 000000                      .section code,text
     \ 000000                      .public fib
-    \ 000000          fib:
-    \ 000000 d4..                 pei     dp:.tiny (_Dp+8)
-    \ 000002 5a                   phy
-    \ 000003 8301                 sta     1,s
-0008                      if (n < 2)
-    \ 000005 a301                 lda     1,s
-    \ 000007 c90200               cmp     ##2
-    \ 00000a 9010                 bcc     `?L6`
-0009                          return n;
-0010                      return fib(n - 1) + fib(n - 2);
-    \ 00000c 3a                   dec     a
-    \ 00000d 20....               jsr     fib
-    \ 000010 85..                 sta     dp:.tiny (_Dp+8)
-    \ 000012 a301                 lda     1,s
+    \ 000000 5a       fib:        phy
+    \ 000001 5a                   phy
+    \ 000002 8303                 sta     3,s
+0008                      unsigned int a, b;
+0009
+0010                      if (n < 2)
+    \ 000004 a303                 lda     3,s
+    \ 000006 c90200               cmp     ##2
+    \ 000009 9012                 bcc     `?L6`
+0011                          return n;
+0012                      a = fib(n - 1);
+    \ 00000b 3a                   dec     a
+    \ 00000c 20....               jsr     fib
+    \ 00000f 8301                 sta     1,s
+0013                      b = fib(n - 2);
+    \ 000011 a303                 lda     3,s
+    \ 000013 3a                   dec     a
     \ 000014 3a                   dec     a
-    \ 000015 3a                   dec     a
-    \ 000016 20....               jsr     fib
-    \ 000019 18                   clc
-    \ 00001a 65..                 adc     dp:.tiny (_Dp+8)
-    \ 00001c          `?L6`:
-0011                  }
-    \ 00001c 7a                   ply
+    \ 000015 20....               jsr     fib
+    \ 000018 8303                 sta     3,s
+0014                      return a + b;
+    \ 00001a 18                   clc
+    \ 00001b 6301                 adc     1,s
+    \ 00001d          `?L6`:
+0015                  }
     \ 00001d 7a                   ply
-    \ 00001e 84..                 sty     dp:.tiny (_Dp+8)
-    \ 000020 60                   rts
-0012
-0013                  unsigned int bench(void)
-0014                  {
+    \ 00001e 7a                   ply
+    \ 00001f 60                   rts
+0016
+0017                  unsigned int bench(void)
+0018                  {
     \ 000000                      .section code,text
     \ 000000                      .public bench
     \ 000000          bench:
-0015                      return fib(16);
+0019                      return fib(16);
     \ 000000 a91000               lda     ##16
     \ 000003 20....               jsr     fib
-0016                  }
+0020                  }
     \ 000006 60                   rts
 
 ##########################
@@ -72,4 +75,4 @@
 #                        #
 ##########################
 
-Executable  (Text): 41 bytes
+Executable  (Text): 40 bytes

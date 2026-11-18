@@ -31,6 +31,7 @@ __fact:
 	phd
 	tcd
 i_0	set	3
+r_1	set	0
 	lda	#$1
 	cmp	<L5+i_0
 	bcs	L10001
@@ -39,6 +40,15 @@ i_0	set	3
 	adc	<L5+i_0
 	pha
 	jsr	__fact
+	sta	<L6+r_1
+	stx	<L6+r_1+2
+	lda	<L5+i_0
+	sta	<R0
+	stz	<R0+2
+	pei	<L6+r_1+2
+	pei	<L6+r_1
+	pei	<R0+2
+	pei	<R0
 	xref	__~lmul
 	jsr	__~lmul
 	sta	<R0
@@ -62,7 +72,7 @@ L10001:
 	ina
 	bra	L8
 L5	equ	8
-L6	equ	9
+L6	equ	5
 	ends
 	efunc
 	code

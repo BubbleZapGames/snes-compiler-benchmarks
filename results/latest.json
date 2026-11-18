@@ -1,9 +1,9 @@
 {
  "schema": 1,
- "run_id": "2026-11-17-194946",
- "date": "2026-11-17T19:49:46Z",
- "label": "retire sum16: it ranked the compilers like copy, the closest of any pair",
- "harness_commit": "668fa316",
+ "run_id": "2026-11-18-162542",
+ "date": "2026-11-18T16:25:42Z",
+ "label": "fib/fact: call results in locals (WDC816CC workaround)",
+ "harness_commit": "39c2c333",
  "emulator": {
   "name": "Mesen-GDB",
   "commit": "0858bc25"
@@ -539,71 +539,61 @@
   "fib": {
    "r65-fs": {
     "status": "unsupported",
-    "note": "the FixedStack ABI rejects recursion",
-    "measured_in": "2026-11-17-095602"
+    "note": "the FixedStack ABI rejects recursion"
    },
    "r65": {
     "status": "ok",
     "cycles": 249047,
     "size": 53,
-    "value": 987,
-    "measured_in": "2026-11-17-095602"
+    "value": 987
    },
    "vbcc": {
     "status": "ok",
     "cycles": 224052,
     "size": 131,
-    "value": 987,
-    "measured_in": "2026-11-17-095602"
+    "value": 987
    },
    "vbcc-nu": {
     "status": "ok",
     "cycles": 224052,
     "size": 131,
-    "value": 987,
-    "measured_in": "2026-11-17-095602"
+    "value": 987
    },
    "calypsi": {
     "status": "ok",
-    "cycles": 197965,
-    "size": 36,
-    "value": 987,
-    "measured_in": "2026-11-17-095602"
+    "cycles": 189979,
+    "size": 35,
+    "value": 987
    },
    "wdc": {
-    "status": "wrong",
-    "cycles": 285765,
-    "size": 61,
-    "value": 0,
-    "measured_in": "2026-11-17-095602"
+    "status": "ok",
+    "cycles": 293745,
+    "size": 63,
+    "value": 987
    },
    "llvm-mos": {
     "status": "ok",
     "cycles": 278160,
     "size": 158,
-    "value": 987,
-    "measured_in": "2026-11-17-095602"
+    "value": 987
    },
    "tcc": {
     "status": "ok",
-    "cycles": 274577,
-    "size": 64,
-    "value": 987,
-    "measured_in": "2026-11-17-095602"
+    "cycles": 282557,
+    "size": 66,
+    "value": 987
    },
    "cc65": {
     "status": "ok",
-    "cycles": 577880,
-    "size": 148,
-    "value": 987,
-    "measured_in": "2026-11-17-095602"
+    "cycles": 711979,
+    "size": 166,
+    "value": 987
    },
    "asm": {
     "status": "ok",
     "cycles": 94192,
     "size": 25,
-    "value": 987,
-    "measured_in": "2026-11-17-111428"
+    "value": 987
    }
   },
   "popcount": {
@@ -1041,69 +1031,61 @@
   "fact": {
    "r65-fs": {
     "status": "unsupported",
-    "note": "the FixedStack ABI rejects recursion",
-    "measured_in": "2026-11-17-095602"
+    "note": "the FixedStack ABI rejects recursion"
    },
    "r65": {
     "status": "ok",
     "cycles": 1718137,
     "size": 981,
-    "value": 12931,
-    "measured_in": "2026-11-17-095602"
+    "value": 12931
    },
    "vbcc": {
     "status": "ok",
     "cycles": 1126185,
     "size": 477,
-    "value": 12931,
-    "measured_in": "2026-11-17-095602"
+    "value": 12931
    },
    "vbcc-nu": {
     "status": "ok",
     "cycles": 1126185,
     "size": 477,
-    "value": 12931,
-    "measured_in": "2026-11-17-095602"
+    "value": 12931
    },
    "calypsi": {
     "status": "ok",
-    "cycles": 3221960,
-    "size": 319,
-    "value": 12931,
-    "measured_in": "2026-11-17-095602"
+    "cycles": 2924860,
+    "size": 265,
+    "value": 12931
    },
    "wdc": {
-    "status": "run_fail",
-    "error": "[CPU] Uninitialized memory read: $0000DB\n[CPU] Uninitialized memory read: $0000DC\n[CPU] Uninitialized memory read: $001F1F\n[CPU] Uninitialized memory read: $001F20\n[CPU] Uninitialized memory read: $000080\n[CPU] Uninitialized memory read: $000081\n[CPU] Uninitialized memory read: $000082\nPC=$00:803F  A=$AD59  X=$0000  Y=$0000  SP=$1FEB  D=$0000  DBR=$00\nFlags: NvmxdIzC  [m16 x16]  Cycles: 507137649\n00803F:             sub start\n00803F: 40          RTI \n00803F:",
-    "measured_in": "2026-11-17-095602"
+    "status": "ok",
+    "cycles": 1873454,
+    "size": 432,
+    "value": 12931
    },
    "llvm-mos": {
     "status": "ok",
     "cycles": 1200275,
     "size": 700,
-    "value": 12931,
-    "measured_in": "2026-11-17-095602"
+    "value": 12931
    },
    "tcc": {
     "status": "ok",
-    "cycles": 1362554,
-    "size": 1741,
-    "value": 12931,
-    "measured_in": "2026-11-17-095602"
+    "cycles": 1622414,
+    "size": 1801,
+    "value": 12931
    },
    "cc65": {
     "status": "ok",
-    "cycles": 4943416,
-    "size": 843,
-    "value": 12931,
-    "measured_in": "2026-11-17-095602"
+    "cycles": 5252796,
+    "size": 883,
+    "value": 12931
    },
    "asm": {
     "status": "ok",
     "cycles": 213322,
     "size": 290,
-    "value": 12931,
-    "measured_in": "2026-11-17-111428"
+    "value": 12931
    }
   },
   "sieve_bit": {

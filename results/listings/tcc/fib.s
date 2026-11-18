@@ -2,7 +2,7 @@
 .accu 16
 .index 16
 .16bit
-.define __fib_locals 2
+.define __fib_locals 4
 
 .SECTION ".bench_inittext_0x0" SUPERFREE
 
@@ -32,18 +32,19 @@ dec.b tcc__r0
 pei (tcc__r0)
 jsr.l fib
 pla
-lda 3 + __fib_locals + 1,s
-sta.b tcc__r1
-dec.b tcc__r1
-dec.b tcc__r1
-pei (tcc__r1)
 lda.b tcc__r0
-sta 0 + __fib_locals + 1,s
+sta -2 + __fib_locals + 1,s
+lda 3 + __fib_locals + 1,s
+sta.b tcc__r0
+dec.b tcc__r0
+dec.b tcc__r0
+pei (tcc__r0)
 jsr.l fib
 pla
-lda -2 + __fib_locals + 1,s
+lda.b tcc__r0
+sta -4 + __fib_locals + 1,s
 clc
-adc.b tcc__r0
+adc -2 + __fib_locals + 1,s
 sta.b tcc__r0
 __local_1:
 __local_2:

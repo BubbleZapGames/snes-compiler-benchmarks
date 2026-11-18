@@ -19,8 +19,12 @@ void bench_init(void)
 
 uint32_t fact(unsigned int i)
 {
-    if (i > 1)
-        return i * fact(i - 1);
+    uint32_t r;
+
+    if (i > 1) {
+        r = fact(i - 1);
+        return i * r;
+    }
     return 1;
 }
 

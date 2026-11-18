@@ -1,0 +1,1236 @@
+{
+ "schema": 1,
+ "run_id": "2026-11-18-162542",
+ "date": "2026-11-18T16:25:42Z",
+ "label": "fib/fact: call results in locals (WDC816CC workaround)",
+ "harness_commit": "39c2c333",
+ "emulator": {
+  "name": "Mesen-GDB",
+  "commit": "0858bc25"
+ },
+ "toolchains": {
+  "r65-fs": {
+   "compiler": "r65",
+   "display": "R65, FixedStack ABI",
+   "language": "r65",
+   "flags": [
+    "--cfg",
+    "snes",
+    "-O2",
+    "--abi",
+    "FixedStack"
+   ],
+   "version": "v0.4.0",
+   "commit": "6796f618"
+  },
+  "r65": {
+   "compiler": "r65",
+   "display": "R65, Default ABI",
+   "language": "r65",
+   "flags": [
+    "--cfg",
+    "snes",
+    "-O2"
+   ],
+   "version": "v0.4.0",
+   "commit": "6796f618"
+  },
+  "vbcc": {
+   "compiler": "vbcc",
+   "display": "vbcc65816 -O3 -speed",
+   "language": "c",
+   "flags": [
+    "+snes-los",
+    "-O3",
+    "-speed"
+   ],
+   "version": "r2"
+  },
+  "vbcc-nu": {
+   "compiler": "vbcc",
+   "display": "vbcc65816 -O3 -speed, no unroll",
+   "language": "c",
+   "flags": [
+    "+snes-los",
+    "-O3",
+    "-speed",
+    "-unroll-size=0"
+   ],
+   "version": "r2"
+  },
+  "calypsi": {
+   "compiler": "calypsi",
+   "display": "Calypsi 65816 -O2 --speed",
+   "language": "c",
+   "flags": [
+    "--target",
+    "SNES",
+    "-O2",
+    "--speed",
+    "--code-model",
+    "small",
+    "--data-model",
+    "small"
+   ],
+   "version": "5.18"
+  },
+  "wdc": {
+   "compiler": "wdc",
+   "display": "WDC816CC 3.49",
+   "language": "c",
+   "flags": [
+    "-MS",
+    "-SOP",
+    "-DSIZEOF_INT=2",
+    "-DSIZEOF_SHORT=2",
+    "-DSIZEOF_LONG=4"
+   ],
+   "version": "3.49"
+  },
+  "llvm-mos": {
+   "compiler": "llvm_mos",
+   "display": "llvm-mos -O3",
+   "language": "c",
+   "flags": [
+    "-mcpu=mosw65816",
+    "-O3"
+   ],
+   "version": "v23.4.0",
+   "commit": "a40207a3"
+  },
+  "tcc": {
+   "compiler": "tcc",
+   "display": "tcc-65816 + 816-opt (PVSnesLib)",
+   "language": "c",
+   "flags": [
+    "-Wall"
+   ],
+   "version": "4.7.1",
+   "commit": "0d68f8e6"
+  },
+  "cc65": {
+   "compiler": "cc65",
+   "display": "cc65 -Oirs",
+   "language": "c",
+   "flags": [
+    "-Oirs",
+    "--cpu",
+    "65sc02"
+   ],
+   "version": "master",
+   "commit": "eebf54af"
+  },
+  "asm": {
+   "compiler": "asm",
+   "display": "Hand-written assembly",
+   "language": "asm",
+   "flags": [],
+   "version": "WLA-DX v10.7a"
+  }
+ },
+ "benchmarks": {
+  "sieve": {
+   "expected": 172
+  },
+  "bubble": {
+   "expected": 11242
+  },
+  "crc16": {
+   "expected": 20831
+  },
+  "copy": {
+   "expected": 72
+  },
+  "entities": {
+   "expected": 7994
+  },
+  "fib": {
+   "expected": 987
+  },
+  "popcount": {
+   "expected": 1021
+  },
+  "dot": {
+   "expected": 18923
+  },
+  "ptrsum": {
+   "expected": 63868
+  },
+  "lz4": {
+   "expected": 42852
+  },
+  "crc32": {
+   "expected": 49239
+  },
+  "pi": {
+   "expected": 2937
+  },
+  "fact": {
+   "expected": 12931
+  },
+  "sieve_bit": {
+   "expected": 1863
+  },
+  "bfs_grid": {
+   "expected": 22089
+  }
+ },
+ "cells": {
+  "sieve": {
+   "r65-fs": {
+    "status": "ok",
+    "cycles": 126312,
+    "size": 77,
+    "value": 172,
+    "measured_in": "2026-11-17-095602"
+   },
+   "r65": {
+    "status": "ok",
+    "cycles": 144021,
+    "size": 91,
+    "value": 172,
+    "measured_in": "2026-11-17-095602"
+   },
+   "vbcc": {
+    "status": "ok",
+    "cycles": 146739,
+    "size": 224,
+    "value": 172,
+    "measured_in": "2026-11-17-095602"
+   },
+   "vbcc-nu": {
+    "status": "ok",
+    "cycles": 166265,
+    "size": 110,
+    "value": 172,
+    "measured_in": "2026-11-17-095602"
+   },
+   "calypsi": {
+    "status": "ok",
+    "cycles": 162440,
+    "size": 93,
+    "value": 172,
+    "measured_in": "2026-11-17-095602"
+   },
+   "wdc": {
+    "status": "ok",
+    "cycles": 162572,
+    "size": 94,
+    "value": 172,
+    "measured_in": "2026-11-17-095602"
+   },
+   "llvm-mos": {
+    "status": "ok",
+    "cycles": 289796,
+    "size": 227,
+    "value": 172,
+    "measured_in": "2026-11-17-095602"
+   },
+   "tcc": {
+    "status": "ok",
+    "cycles": 172837,
+    "size": 124,
+    "value": 172,
+    "measured_in": "2026-11-17-095602"
+   },
+   "cc65": {
+    "status": "ok",
+    "cycles": 435072,
+    "size": 275,
+    "value": 172,
+    "measured_in": "2026-11-17-095602"
+   },
+   "asm": {
+    "status": "ok",
+    "cycles": 58525,
+    "size": 107,
+    "value": 172,
+    "measured_in": "2026-11-17-111428"
+   }
+  },
+  "bubble": {
+   "r65-fs": {
+    "status": "ok",
+    "cycles": 182451,
+    "size": 162,
+    "value": 11242,
+    "measured_in": "2026-11-17-095602"
+   },
+   "r65": {
+    "status": "ok",
+    "cycles": 194981,
+    "size": 179,
+    "value": 11242,
+    "measured_in": "2026-11-17-095602"
+   },
+   "vbcc": {
+    "status": "ok",
+    "cycles": 248100,
+    "size": 1198,
+    "value": 11242,
+    "measured_in": "2026-11-17-095602"
+   },
+   "vbcc-nu": {
+    "status": "ok",
+    "cycles": 244371,
+    "size": 218,
+    "value": 11242,
+    "measured_in": "2026-11-17-095602"
+   },
+   "calypsi": {
+    "status": "ok",
+    "cycles": 437852,
+    "size": 276,
+    "value": 11242,
+    "measured_in": "2026-11-17-095602"
+   },
+   "wdc": {
+    "status": "ok",
+    "cycles": 272269,
+    "size": 275,
+    "value": 11242,
+    "measured_in": "2026-11-17-095602"
+   },
+   "llvm-mos": {
+    "status": "ok",
+    "cycles": 77237,
+    "size": 119,
+    "value": 11242,
+    "measured_in": "2026-11-17-095602"
+   },
+   "tcc": {
+    "status": "ok",
+    "cycles": 413722,
+    "size": 398,
+    "value": 11242,
+    "measured_in": "2026-11-17-095602"
+   },
+   "cc65": {
+    "status": "ok",
+    "cycles": 559397,
+    "size": 450,
+    "value": 11242,
+    "measured_in": "2026-11-17-095602"
+   },
+   "asm": {
+    "status": "ok",
+    "cycles": 48452,
+    "size": 97,
+    "value": 11242,
+    "measured_in": "2026-11-17-111428"
+   }
+  },
+  "crc16": {
+   "r65-fs": {
+    "status": "ok",
+    "cycles": 57851,
+    "size": 85,
+    "value": 20831,
+    "measured_in": "2026-11-17-095602"
+   },
+   "r65": {
+    "status": "ok",
+    "cycles": 64531,
+    "size": 97,
+    "value": 20831,
+    "measured_in": "2026-11-17-095602"
+   },
+   "vbcc": {
+    "status": "ok",
+    "cycles": 52721,
+    "size": 495,
+    "value": 20831,
+    "measured_in": "2026-11-17-095602"
+   },
+   "vbcc-nu": {
+    "status": "ok",
+    "cycles": 90351,
+    "size": 111,
+    "value": 20831,
+    "measured_in": "2026-11-17-095602"
+   },
+   "calypsi": {
+    "status": "ok",
+    "cycles": 167596,
+    "size": 127,
+    "value": 20831,
+    "measured_in": "2026-11-17-095602"
+   },
+   "wdc": {
+    "status": "ok",
+    "cycles": 125739,
+    "size": 152,
+    "value": 20831,
+    "measured_in": "2026-11-17-095602"
+   },
+   "llvm-mos": {
+    "status": "ok",
+    "cycles": 59309,
+    "size": 248,
+    "value": 20831,
+    "measured_in": "2026-11-17-095602"
+   },
+   "tcc": {
+    "status": "ok",
+    "cycles": 160373,
+    "size": 195,
+    "value": 20831,
+    "measured_in": "2026-11-17-095602"
+   },
+   "cc65": {
+    "status": "ok",
+    "cycles": 275577,
+    "size": 359,
+    "value": 20831,
+    "measured_in": "2026-11-17-095602"
+   },
+   "asm": {
+    "status": "ok",
+    "cycles": 14662,
+    "size": 150,
+    "value": 20831,
+    "measured_in": "2026-11-17-111428"
+   }
+  },
+  "copy": {
+   "r65-fs": {
+    "status": "ok",
+    "cycles": 18487,
+    "size": 76,
+    "value": 72,
+    "measured_in": "2026-11-17-095602"
+   },
+   "r65": {
+    "status": "ok",
+    "cycles": 18525,
+    "size": 91,
+    "value": 72,
+    "measured_in": "2026-11-17-095602"
+   },
+   "vbcc": {
+    "status": "ok",
+    "cycles": 26495,
+    "size": 691,
+    "value": 72,
+    "measured_in": "2026-11-17-095602"
+   },
+   "vbcc-nu": {
+    "status": "ok",
+    "cycles": 40002,
+    "size": 100,
+    "value": 72,
+    "measured_in": "2026-11-17-095602"
+   },
+   "calypsi": {
+    "status": "ok",
+    "cycles": 28730,
+    "size": 85,
+    "value": 72,
+    "measured_in": "2026-11-17-095602"
+   },
+   "wdc": {
+    "status": "ok",
+    "cycles": 41051,
+    "size": 122,
+    "value": 72,
+    "measured_in": "2026-11-17-095602"
+   },
+   "llvm-mos": {
+    "status": "ok",
+    "cycles": 42129,
+    "size": 192,
+    "value": 72,
+    "measured_in": "2026-11-17-095602"
+   },
+   "tcc": {
+    "status": "ok",
+    "cycles": 44126,
+    "size": 151,
+    "value": 72,
+    "measured_in": "2026-11-17-095602"
+   },
+   "cc65": {
+    "status": "ok",
+    "cycles": 140410,
+    "size": 306,
+    "value": 72,
+    "measured_in": "2026-11-17-095602"
+   },
+   "asm": {
+    "status": "ok",
+    "cycles": 7231,
+    "size": 82,
+    "value": 72,
+    "measured_in": "2026-11-17-111428"
+   }
+  },
+  "entities": {
+   "r65-fs": {
+    "status": "ok",
+    "cycles": 61332,
+    "size": 281,
+    "value": 7994,
+    "measured_in": "2026-11-17-095602"
+   },
+   "r65": {
+    "status": "ok",
+    "cycles": 65169,
+    "size": 299,
+    "value": 7994,
+    "measured_in": "2026-11-17-095602"
+   },
+   "vbcc": {
+    "status": "ok",
+    "cycles": 61172,
+    "size": 1238,
+    "value": 7994,
+    "measured_in": "2026-11-17-095602"
+   },
+   "vbcc-nu": {
+    "status": "ok",
+    "cycles": 68102,
+    "size": 349,
+    "value": 7994,
+    "measured_in": "2026-11-17-095602"
+   },
+   "calypsi": {
+    "status": "ok",
+    "cycles": 422432,
+    "size": 727,
+    "value": 7994,
+    "measured_in": "2026-11-17-095602"
+   },
+   "wdc": {
+    "status": "ok",
+    "cycles": 106183,
+    "size": 392,
+    "value": 7994,
+    "measured_in": "2026-11-17-095602"
+   },
+   "llvm-mos": {
+    "status": "ok",
+    "cycles": 116751,
+    "size": 1563,
+    "value": 7994,
+    "measured_in": "2026-11-17-095602"
+   },
+   "tcc": {
+    "status": "ok",
+    "cycles": 140555,
+    "size": 576,
+    "value": 7994,
+    "measured_in": "2026-11-17-095602"
+   },
+   "cc65": {
+    "status": "ok",
+    "cycles": 401091,
+    "size": 1085,
+    "value": 7994,
+    "measured_in": "2026-11-17-095602"
+   },
+   "asm": {
+    "status": "ok",
+    "cycles": 26125,
+    "size": 177,
+    "value": 7994,
+    "measured_in": "2026-11-17-111428"
+   }
+  },
+  "fib": {
+   "r65-fs": {
+    "status": "unsupported",
+    "note": "the FixedStack ABI rejects recursion"
+   },
+   "r65": {
+    "status": "ok",
+    "cycles": 249047,
+    "size": 53,
+    "value": 987
+   },
+   "vbcc": {
+    "status": "ok",
+    "cycles": 224052,
+    "size": 131,
+    "value": 987
+   },
+   "vbcc-nu": {
+    "status": "ok",
+    "cycles": 224052,
+    "size": 131,
+    "value": 987
+   },
+   "calypsi": {
+    "status": "ok",
+    "cycles": 189979,
+    "size": 35,
+    "value": 987
+   },
+   "wdc": {
+    "status": "ok",
+    "cycles": 293745,
+    "size": 63,
+    "value": 987
+   },
+   "llvm-mos": {
+    "status": "ok",
+    "cycles": 278160,
+    "size": 158,
+    "value": 987
+   },
+   "tcc": {
+    "status": "ok",
+    "cycles": 282557,
+    "size": 66,
+    "value": 987
+   },
+   "cc65": {
+    "status": "ok",
+    "cycles": 711979,
+    "size": 166,
+    "value": 987
+   },
+   "asm": {
+    "status": "ok",
+    "cycles": 94192,
+    "size": 25,
+    "value": 987
+   }
+  },
+  "popcount": {
+   "r65-fs": {
+    "status": "ok",
+    "cycles": 60366,
+    "size": 78,
+    "value": 1021,
+    "measured_in": "2026-11-17-095602"
+   },
+   "r65": {
+    "status": "ok",
+    "cycles": 75106,
+    "size": 96,
+    "value": 1021,
+    "measured_in": "2026-11-17-095602"
+   },
+   "vbcc": {
+    "status": "ok",
+    "cycles": 76826,
+    "size": 361,
+    "value": 1021,
+    "measured_in": "2026-11-17-095602"
+   },
+   "vbcc-nu": {
+    "status": "ok",
+    "cycles": 76826,
+    "size": 96,
+    "value": 1021,
+    "measured_in": "2026-11-17-095602"
+   },
+   "calypsi": {
+    "status": "ok",
+    "cycles": 101110,
+    "size": 93,
+    "value": 1021,
+    "measured_in": "2026-11-17-095602"
+   },
+   "wdc": {
+    "status": "ok",
+    "cycles": 91023,
+    "size": 122,
+    "value": 1021,
+    "measured_in": "2026-11-17-095602"
+   },
+   "llvm-mos": {
+    "status": "ok",
+    "cycles": 87077,
+    "size": 149,
+    "value": 1021,
+    "measured_in": "2026-11-17-095602"
+   },
+   "tcc": {
+    "status": "ok",
+    "cycles": 172030,
+    "size": 176,
+    "value": 1021,
+    "measured_in": "2026-11-17-095602"
+   },
+   "cc65": {
+    "status": "ok",
+    "cycles": 175652,
+    "size": 296,
+    "value": 1021,
+    "measured_in": "2026-11-17-095602"
+   },
+   "asm": {
+    "status": "ok",
+    "cycles": 16205,
+    "size": 66,
+    "value": 1021,
+    "measured_in": "2026-11-17-111428"
+   }
+  },
+  "dot": {
+   "r65-fs": {
+    "status": "ok",
+    "cycles": 5424,
+    "size": 100,
+    "value": 18923,
+    "measured_in": "2026-11-17-095602"
+   },
+   "r65": {
+    "status": "ok",
+    "cycles": 5562,
+    "size": 105,
+    "value": 18923,
+    "measured_in": "2026-11-17-095602"
+   },
+   "vbcc": {
+    "status": "ok",
+    "cycles": 10558,
+    "size": 909,
+    "value": 18923,
+    "measured_in": "2026-11-17-095602"
+   },
+   "vbcc-nu": {
+    "status": "ok",
+    "cycles": 11486,
+    "size": 190,
+    "value": 18923,
+    "measured_in": "2026-11-17-095602"
+   },
+   "calypsi": {
+    "status": "ok",
+    "cycles": 4240,
+    "size": 86,
+    "value": 18923,
+    "measured_in": "2026-11-17-095602"
+   },
+   "wdc": {
+    "status": "ok",
+    "cycles": 20817,
+    "size": 182,
+    "value": 18923,
+    "measured_in": "2026-11-17-095602"
+   },
+   "llvm-mos": {
+    "status": "ok",
+    "cycles": 27253,
+    "size": 177,
+    "value": 18923,
+    "measured_in": "2026-11-17-095602"
+   },
+   "tcc": {
+    "status": "ok",
+    "cycles": 11068,
+    "size": 1367,
+    "value": 18923,
+    "measured_in": "2026-11-17-095602"
+   },
+   "cc65": {
+    "status": "ok",
+    "cycles": 31174,
+    "size": 416,
+    "value": 18923,
+    "measured_in": "2026-11-17-095602"
+   },
+   "asm": {
+    "status": "ok",
+    "cycles": 1725,
+    "size": 98,
+    "value": 18923,
+    "measured_in": "2026-11-17-111428"
+   }
+  },
+  "ptrsum": {
+   "r65-fs": {
+    "status": "ok",
+    "cycles": 15404,
+    "size": 71,
+    "value": 63868,
+    "measured_in": "2026-11-17-095602"
+   },
+   "r65": {
+    "status": "ok",
+    "cycles": 17996,
+    "size": 86,
+    "value": 63868,
+    "measured_in": "2026-11-17-095602"
+   },
+   "vbcc": {
+    "status": "ok",
+    "cycles": 11256,
+    "size": 778,
+    "value": 63868,
+    "measured_in": "2026-11-17-095602"
+   },
+   "vbcc-nu": {
+    "status": "ok",
+    "cycles": 17943,
+    "size": 106,
+    "value": 63868,
+    "measured_in": "2026-11-17-095602"
+   },
+   "calypsi": {
+    "status": "ok",
+    "cycles": 27719,
+    "size": 86,
+    "value": 63868,
+    "measured_in": "2026-11-17-095602"
+   },
+   "wdc": {
+    "status": "ok",
+    "cycles": 25189,
+    "size": 113,
+    "value": 63868,
+    "measured_in": "2026-11-17-095602"
+   },
+   "llvm-mos": {
+    "status": "ok",
+    "cycles": 24891,
+    "size": 157,
+    "value": 63868,
+    "measured_in": "2026-11-17-095602"
+   },
+   "tcc": {
+    "status": "ok",
+    "cycles": 41572,
+    "size": 156,
+    "value": 63868,
+    "measured_in": "2026-11-17-095602"
+   },
+   "cc65": {
+    "status": "ok",
+    "cycles": 95530,
+    "size": 296,
+    "value": 63868,
+    "measured_in": "2026-11-17-095602"
+   },
+   "asm": {
+    "status": "ok",
+    "cycles": 6736,
+    "size": 103,
+    "value": 63868,
+    "measured_in": "2026-11-17-111428"
+   }
+  },
+  "lz4": {
+   "r65-fs": {
+    "status": "ok",
+    "cycles": 98632,
+    "size": 688,
+    "value": 42852,
+    "measured_in": "2026-11-17-095602"
+   },
+   "r65": {
+    "status": "ok",
+    "cycles": 129459,
+    "size": 709,
+    "value": 42852,
+    "measured_in": "2026-11-17-095602"
+   },
+   "vbcc": {
+    "status": "ok",
+    "cycles": 103959,
+    "size": 718,
+    "value": 42852,
+    "measured_in": "2026-11-17-095602"
+   },
+   "vbcc-nu": {
+    "status": "ok",
+    "cycles": 103959,
+    "size": 718,
+    "value": 42852,
+    "measured_in": "2026-11-17-095602"
+   },
+   "calypsi": {
+    "status": "ok",
+    "cycles": 165877,
+    "size": 763,
+    "value": 42852,
+    "measured_in": "2026-11-17-095602"
+   },
+   "wdc": {
+    "status": "ok",
+    "cycles": 123017,
+    "size": 646,
+    "value": 42852,
+    "measured_in": "2026-11-17-095602"
+   },
+   "llvm-mos": {
+    "status": "ok",
+    "cycles": 172830,
+    "size": 1079,
+    "value": 42852,
+    "measured_in": "2026-11-17-095602"
+   },
+   "tcc": {
+    "status": "ok",
+    "cycles": 155717,
+    "size": 754,
+    "value": 42852,
+    "measured_in": "2026-11-17-095602"
+   },
+   "cc65": {
+    "status": "ok",
+    "cycles": 448399,
+    "size": 984,
+    "value": 42852,
+    "measured_in": "2026-11-17-095602"
+   },
+   "asm": {
+    "status": "ok",
+    "cycles": 25208,
+    "size": 529,
+    "value": 42852,
+    "measured_in": "2026-11-17-111428"
+   }
+  },
+  "crc32": {
+   "r65-fs": {
+    "status": "ok",
+    "cycles": 541856,
+    "size": 123,
+    "value": 49239,
+    "measured_in": "2026-11-17-095602"
+   },
+   "r65": {
+    "status": "ok",
+    "cycles": 658441,
+    "size": 140,
+    "value": 49239,
+    "measured_in": "2026-11-17-095602"
+   },
+   "vbcc": {
+    "status": "ok",
+    "cycles": 544885,
+    "size": 767,
+    "value": 49239,
+    "measured_in": "2026-11-17-095602"
+   },
+   "vbcc-nu": {
+    "status": "ok",
+    "cycles": 691315,
+    "size": 177,
+    "value": 49239,
+    "measured_in": "2026-11-17-095602"
+   },
+   "calypsi": {
+    "status": "ok",
+    "cycles": 604271,
+    "size": 154,
+    "value": 49239,
+    "measured_in": "2026-11-17-095602"
+   },
+   "wdc": {
+    "status": "ok",
+    "cycles": 1160713,
+    "size": 302,
+    "value": 49239,
+    "measured_in": "2026-11-17-095602"
+   },
+   "llvm-mos": {
+    "status": "ok",
+    "cycles": 559458,
+    "size": 586,
+    "value": 49239,
+    "measured_in": "2026-11-17-095602"
+   },
+   "tcc": {
+    "status": "ok",
+    "cycles": 2050282,
+    "size": 473,
+    "value": 49239,
+    "measured_in": "2026-11-17-095602"
+   },
+   "cc65": {
+    "status": "ok",
+    "cycles": 4737987,
+    "size": 614,
+    "value": 49239,
+    "measured_in": "2026-11-17-095602"
+   },
+   "asm": {
+    "status": "ok",
+    "cycles": 180819,
+    "size": 346,
+    "value": 49239,
+    "measured_in": "2026-11-17-111428"
+   }
+  },
+  "pi": {
+   "r65-fs": {
+    "status": "ok",
+    "cycles": 17715914,
+    "size": 1428,
+    "value": 2937,
+    "measured_in": "2026-11-17-095602"
+   },
+   "r65": {
+    "status": "ok",
+    "cycles": 20582335,
+    "size": 1347,
+    "value": 2937,
+    "measured_in": "2026-11-17-095602"
+   },
+   "vbcc": {
+    "status": "ok",
+    "cycles": 7404753,
+    "size": 661,
+    "value": 2937,
+    "measured_in": "2026-11-17-095602"
+   },
+   "vbcc-nu": {
+    "status": "ok",
+    "cycles": 7407933,
+    "size": 518,
+    "value": 2937,
+    "measured_in": "2026-11-17-095602"
+   },
+   "calypsi": {
+    "status": "ok",
+    "cycles": 10005586,
+    "size": 421,
+    "value": 2937,
+    "measured_in": "2026-11-17-095602"
+   },
+   "wdc": {
+    "status": "ok",
+    "cycles": 9092479,
+    "size": 526,
+    "value": 2937,
+    "measured_in": "2026-11-17-095602"
+   },
+   "llvm-mos": {
+    "status": "ok",
+    "cycles": 8682727,
+    "size": 1136,
+    "value": 2937,
+    "measured_in": "2026-11-17-095602"
+   },
+   "tcc": {
+    "status": "ok",
+    "cycles": 9986915,
+    "size": 1849,
+    "value": 2937,
+    "measured_in": "2026-11-17-095602"
+   },
+   "cc65": {
+    "status": "ok",
+    "cycles": 16117604,
+    "size": 948,
+    "value": 2937,
+    "measured_in": "2026-11-17-095602"
+   },
+   "asm": {
+    "status": "ok",
+    "cycles": 470451,
+    "size": 559,
+    "value": 2937,
+    "measured_in": "2026-11-17-111428"
+   }
+  },
+  "fact": {
+   "r65-fs": {
+    "status": "unsupported",
+    "note": "the FixedStack ABI rejects recursion"
+   },
+   "r65": {
+    "status": "ok",
+    "cycles": 1718137,
+    "size": 981,
+    "value": 12931
+   },
+   "vbcc": {
+    "status": "ok",
+    "cycles": 1126185,
+    "size": 477,
+    "value": 12931
+   },
+   "vbcc-nu": {
+    "status": "ok",
+    "cycles": 1126185,
+    "size": 477,
+    "value": 12931
+   },
+   "calypsi": {
+    "status": "ok",
+    "cycles": 2924860,
+    "size": 265,
+    "value": 12931
+   },
+   "wdc": {
+    "status": "ok",
+    "cycles": 1873454,
+    "size": 432,
+    "value": 12931
+   },
+   "llvm-mos": {
+    "status": "ok",
+    "cycles": 1200275,
+    "size": 700,
+    "value": 12931
+   },
+   "tcc": {
+    "status": "ok",
+    "cycles": 1622414,
+    "size": 1801,
+    "value": 12931
+   },
+   "cc65": {
+    "status": "ok",
+    "cycles": 5252796,
+    "size": 883,
+    "value": 12931
+   },
+   "asm": {
+    "status": "ok",
+    "cycles": 213322,
+    "size": 290,
+    "value": 12931
+   }
+  },
+  "sieve_bit": {
+   "r65-fs": {
+    "status": "ok",
+    "cycles": 1783459,
+    "size": 161,
+    "value": 1863,
+    "measured_in": "2026-11-17-095602"
+   },
+   "r65": {
+    "status": "ok",
+    "cycles": 1948732,
+    "size": 174,
+    "value": 1863,
+    "measured_in": "2026-11-17-095602"
+   },
+   "vbcc": {
+    "status": "ok",
+    "cycles": 1825494,
+    "size": 402,
+    "value": 1863,
+    "measured_in": "2026-11-17-095602"
+   },
+   "vbcc-nu": {
+    "status": "ok",
+    "cycles": 1844506,
+    "size": 218,
+    "value": 1863,
+    "measured_in": "2026-11-17-095602"
+   },
+   "calypsi": {
+    "status": "ok",
+    "cycles": 2400074,
+    "size": 174,
+    "value": 1863,
+    "measured_in": "2026-11-17-095602"
+   },
+   "wdc": {
+    "status": "ok",
+    "cycles": 3367347,
+    "size": 215,
+    "value": 1863,
+    "measured_in": "2026-11-17-095602"
+   },
+   "llvm-mos": {
+    "status": "ok",
+    "cycles": 3242070,
+    "size": 347,
+    "value": 1863,
+    "measured_in": "2026-11-17-095602"
+   },
+   "tcc": {
+    "status": "ok",
+    "cycles": 3137092,
+    "size": 235,
+    "value": 1863,
+    "measured_in": "2026-11-17-095602"
+   },
+   "cc65": {
+    "status": "ok",
+    "cycles": 6851876,
+    "size": 467,
+    "value": 1863,
+    "measured_in": "2026-11-17-095602"
+   },
+   "asm": {
+    "status": "ok",
+    "cycles": 909323,
+    "size": 193,
+    "value": 1863,
+    "measured_in": "2026-11-17-111428"
+   }
+  },
+  "bfs_grid": {
+   "r65-fs": {
+    "status": "ok",
+    "cycles": 276667,
+    "size": 334,
+    "value": 22089,
+    "measured_in": "2026-11-17-193431"
+   },
+   "r65": {
+    "status": "ok",
+    "cycles": 376218,
+    "size": 379,
+    "value": 22089,
+    "measured_in": "2026-11-17-193431"
+   },
+   "vbcc": {
+    "status": "ok",
+    "cycles": 259546,
+    "size": 858,
+    "value": 22089,
+    "measured_in": "2026-11-17-193431"
+   },
+   "vbcc-nu": {
+    "status": "ok",
+    "cycles": 278994,
+    "size": 591,
+    "value": 22089,
+    "measured_in": "2026-11-17-193431"
+   },
+   "calypsi": {
+    "status": "ok",
+    "cycles": 301576,
+    "size": 326,
+    "value": 22089,
+    "measured_in": "2026-11-17-193431"
+   },
+   "wdc": {
+    "status": "ok",
+    "cycles": 394936,
+    "size": 365,
+    "value": 22089,
+    "measured_in": "2026-11-17-193431"
+   },
+   "llvm-mos": {
+    "status": "ok",
+    "cycles": 376433,
+    "size": 881,
+    "value": 22089,
+    "measured_in": "2026-11-17-193431"
+   },
+   "tcc": {
+    "status": "ok",
+    "cycles": 421481,
+    "size": 520,
+    "value": 22089,
+    "measured_in": "2026-11-17-193431"
+   },
+   "cc65": {
+    "status": "ok",
+    "cycles": 965291,
+    "size": 837,
+    "value": 22089,
+    "measured_in": "2026-11-17-193431"
+   },
+   "asm": {
+    "status": "ok",
+    "cycles": 106352,
+    "size": 358,
+    "value": 22089,
+    "measured_in": "2026-11-17-193431"
+   }
+  }
+ }
+}

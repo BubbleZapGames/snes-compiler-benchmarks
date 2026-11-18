@@ -78,8 +78,7 @@ license = "WDCTools license (Windows freeware; not for commercial products on no
 placement = "small memory model: code and data in bank $00, globals in low RAM"
 notes = ["Windows tools, run under Wine. Measured locally.",
          "The SIZEOF_* defines are what WDC's stdint.h needs to define uint32_t.",
-         "fact crashes: after the recursive call WDC816CC calls its 32-bit multiply helper without pushing the other operand.",
-         "fib is wrong at every optimisation level: after the second recursive call WDC816CC adds the result from its scratch register R0, which nothing stored, instead of from A, where the manual says results return."]
+         "WDC816CC miscompiles a call whose result is used directly as an operand: fact(i - 1) * i calls the 32-bit multiply helper without pushing either operand, and fib(n - 1) + fib(n - 2) adds from scratch registers nothing stored. So fib and fact store each recursive call's result in a local first."]
 
 [llvm-mos]
 kind = "6502"
